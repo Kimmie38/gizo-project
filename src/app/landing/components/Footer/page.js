@@ -1,4 +1,3 @@
-// app/components/Footer.js
 "use client";
 
 import React from "react";
@@ -45,19 +44,20 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#27312E] text-gray-300 py-10 px-4 sm:px-8 md:px-16">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <footer className="bg-[#27312E] text-gray-300 px-6 sm:px-10 lg:px-16 py-12">
+      {/* Grid Links */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {footerLinks.map((section, i) => (
           <div key={i}>
-            <h4 className="text-base sm:text-lg font-semibold text-white mb-4">
+            <h4 className="text-lg font-semibold text-white mb-5 tracking-wide">
               {section.title}
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {section.links.map((link, idx) => (
                 <li key={idx}>
                   <Link
                     href={link.href}
-                    className="text-sm sm:text-base hover:text-teal-400 transition"
+                    className="text-sm sm:text-base text-gray-400 hover:text-teal-400 transition-colors duration-200"
                   >
                     {link.name}
                   </Link>
@@ -69,8 +69,8 @@ export default function Footer() {
       </div>
 
       {/* Bottom note */}
-      <div className="mt-10 border-t border-gray-600 pt-6 text-center text-xs sm:text-sm text-gray-400">
-        © {new Date().getFullYear()} Your Company. All rights reserved.
+      <div className="max-w-7xl mx-auto mt-12 border-t border-gray-700 pt-6 text-center text-xs sm:text-sm text-gray-400">
+        © {new Date().getFullYear()} <span className="font-medium text-white">Your Company</span>. All rights reserved.
       </div>
     </footer>
   );

@@ -21,37 +21,44 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-12 sm:py-16 bg-white">
+    <section className="py-14 sm:py-20 bg-gray-50">
       {/* Header */}
-      <div className="text-center mb-10 sm:mb-12 px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-          How it works.
+      <div className="text-center mb-12 px-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+          How It Works
         </h2>
-        <p className="text-gray-600 text-sm sm:text-base">
-          This is how our products work
+        <p className="text-gray-600 text-sm sm:text-base mt-2">
+          Simple steps to get started and grow with us
         </p>
       </div>
 
       {/* Steps Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {steps.map((step, index) => (
           <div
             key={index}
-            className="p-6 bg-gray-50 rounded-2xl shadow hover:shadow-md transition text-center"
+            className="p-6 sm:p-8 bg-white rounded-2xl shadow-md hover:shadow-lg transition flex flex-col items-center text-center"
           >
-            <div className="flex justify-center mb-4">
+            {/* Icon */}
+            <div className="flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-teal-50 mb-6">
               <Image
                 src={step.icon}
                 alt={step.title}
                 width={64}
                 height={64}
-                className="w-12 h-12 sm:w-16 sm:h-16"
+                className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
               />
             </div>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
+
+            {/* Title */}
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">
               {step.title}
             </h3>
-            <p className="text-gray-600 text-sm sm:text-base">{step.desc}</p>
+
+            {/* Description */}
+            <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+              {step.desc}
+            </p>
           </div>
         ))}
       </div>

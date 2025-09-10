@@ -11,18 +11,20 @@ const SearchBar = ({
       <input
         type="text"
         placeholder={placeholder}
-        className="flex-1 px-4 py-3 outline-none"
+        className="flex-1 px-5 py-3 text-gray-700 text-sm sm:text-base outline-none placeholder-gray-400"
       />
 
       {/* Dropdown */}
-      <select className="px-3 py-3 border-l text-gray-600 outline-none">
+      <select className="px-4 py-3 text-gray-600 text-sm sm:text-base border-l outline-none bg-white hover:cursor-pointer">
         {locations.map((loc, index) => (
-          <option key={index}>{loc}</option>
+          <option key={index} value={loc}>
+            {loc}
+          </option>
         ))}
       </select>
 
       {/* Button */}
-      <button className="bg-green-500 px-6 py-3 text-white font-medium hover:bg-green-600">
+      <button className="bg-green-500 px-6 py-3 text-white text-sm sm:text-base font-medium hover:bg-green-600 transition-all">
         {buttonLabel}
       </button>
     </div>

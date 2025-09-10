@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { Bookmark, Share2 } from "lucide-react"; // icons
+import { Bookmark, Share2 } from "lucide-react"; 
 
 const stores = [
   {
@@ -40,13 +40,13 @@ const stores = [
 
 const FeaturedStores = () => {
   return (
-    <section className="py-12 sm:py-16 bg-white">
+    <section className="py-12 sm:py-16 bg-gray-50">
       {/* Header */}
       <div className="text-center mb-10 sm:mb-12 px-4">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
+        <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
           Our Featured Stores
         </h2>
-        <p className="text-gray-600 text-sm sm:text-base mt-1">
+        <p className="text-gray-500 text-sm md:text-base mt-1">
           These are some of our stores
         </p>
       </div>
@@ -56,38 +56,40 @@ const FeaturedStores = () => {
         {stores.map((store) => (
           <div
             key={store.id}
-            className="bg-white border rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col"
+            className="bg-white rounded-2xl shadow-md p-5 flex flex-col border hover:shadow-lg transition"
           >
             {/* Store Header */}
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <Image
                   src={store.logo}
                   alt={store.name}
-                  width={40}
-                  height={40}
-                  className="rounded-full"
+                  width={48}
+                  height={48}
+                  className="rounded-full border"
                 />
                 <div>
-                  <h3 className="text-sm sm:text-base font-semibold text-gray-900">
+                  <h3 className="text-base font-bold text-gray-900">
                     {store.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-500">{store.address}</p>
+                  <p className="text-xs sm:text-sm text-gray-500">
+                    {store.address}
+                  </p>
                 </div>
               </div>
               <div className="flex gap-2 text-gray-500">
-                <Bookmark className="w-4 h-4 sm:w-5 sm:h-5 cursor-pointer hover:text-gray-700" />
-                <Share2 className="w-4 h-4 sm:w-5 sm:h-5 cursor-pointer hover:text-gray-700" />
+                <Bookmark className="w-5 h-5 cursor-pointer hover:text-gray-700" />
+                <Share2 className="w-5 h-5 cursor-pointer hover:text-gray-700" />
               </div>
             </div>
 
             {/* Preview Image */}
-            <div className="relative w-full h-40 sm:h-48 mb-3">
+            <div className="relative w-full h-40 sm:h-48 md:h-52 mb-4">
               <Image
                 src={store.preview}
                 alt={store.name}
                 fill
-                className="object-cover rounded-md"
+                className="object-cover rounded-xl"
               />
             </div>
 
