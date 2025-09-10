@@ -94,7 +94,7 @@ export default function Login() {
           {/* Sign in link */}
           <p className="text-center text-sm text-gray-400">
             Don't have an account?{" "}
-            <a href="/signIN/login" className="text-emerald-400 hover:underline">
+            <a href="/signIN/signup" className="text-emerald-400 hover:underline">
               Sign In
             </a>
           </p>

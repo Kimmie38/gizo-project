@@ -22,9 +22,11 @@ const Navbar = () => {
 
       {/* Buttons */}
       <div className="flex gap-3">
+         <Link href="/signIN/login">
         <button className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
           Sign In
         </button>
+        </Link>
         <Link href="/signIN/signup">
         <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
             Sign Up
