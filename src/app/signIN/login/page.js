@@ -103,7 +103,7 @@ export default function Login() {
           {/* Google Signup */}
           <button className="w-[450px] mt-4 flex items-center justify-center border border-gray-600 py-3 rounded-xl hover:bg-gray-800 transition text-sm md:text-base text-black">
             <Image
-              src="/icons/google.png" // ✅ from public/icons
+              src="/icons/google.png"
               alt="Google"
               width={20}
               height={20}
