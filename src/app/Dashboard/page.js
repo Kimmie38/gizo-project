@@ -13,8 +13,8 @@ import {
   FiShoppingCart,
 } from "react-icons/fi";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -34,19 +34,19 @@ const navItems = [
 const cards = [
   {
     title: "Products and Services",
-    value: "0",
+    value: "24",
     subtitle: "Active Listings",
     icon: FiBox,
   },
   {
     title: "Orders & Inquiries",
-    value: "0",
+    value: "18",
     subtitle: "Pending responses",
     icon: FiShoppingCart,
   },
   {
     title: "Profile Views",
-    value: "0",
+    value: "1,123",
     subtitle: "Monthly Traffic",
     icon: FiEye,
   },
@@ -54,13 +54,13 @@ const cards = [
 
 // Chart data
 const chartData = [
-  { day: "Mon", views: 2000 },
-  { day: "Tue", views: 1200 },
-  { day: "Wed", views: 10000 },
-  { day: "Thu", views: 4000 },
-  { day: "Fri", views: 5000 },
-  { day: "Sat", views: 4500 },
-  { day: "Sun", views: 6000 },
+  { day: "Mon", views: 1200 },
+  { day: "Tue", views: 1800 },
+  { day: "Wed", views: 9000 },
+  { day: "Thu", views: 3200 },
+  { day: "Fri", views: 4200 },
+  { day: "Sat", views: 3800 },
+  { day: "Sun", views: 6200 },
 ];
 
 export default function Dashboard() {
@@ -188,19 +188,25 @@ export default function Dashboard() {
                   </div>
                   <div className="w-full h-64">
                     <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={chartData}>
+                      <AreaChart data={chartData}>
+                        <defs>
+                          <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#10b981" stopOpacity={0.2}/>
+                            <stop offset="95%" stopColor="#10b981" stopOpacity={0.02}/>
+                          </linearGradient>
+                        </defs>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="day" />
                         <YAxis />
                         <Tooltip />
-                        <Line
+                        <Area
                           type="monotone"
                           dataKey="views"
-                          stroke="#10b981"
-                          fill="#6ee7b7"
+                          stroke="#059669"
+                          fill="url(#grad)"
                           strokeWidth={2}
                         />
-                      </LineChart>
+                      </AreaChart>
                     </ResponsiveContainer>
                   </div>
                 </section>
