@@ -93,11 +93,12 @@ export default function Login() {
 
           {/* Sign in link */}
           <p className="text-center text-sm text-gray-400">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a href="/signIN/signup" className="text-emerald-400 hover:underline">
               Sign In
             </a>
           </p>
+
 
           {/* Google Signup */}
           <button className="w-[450px] mt-4 flex items-center justify-center border border-gray-600 py-3 rounded-xl hover:bg-gray-800 transition text-sm md:text-base text-black">
