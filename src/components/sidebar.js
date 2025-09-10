@@ -1,22 +1,28 @@
 "use client";
+import { useRouter, usePathname } from "next/navigation";
+import {
+  FiHome,
+  FiBox,
+  FiFileText,
+  FiSettings,
+} from "react-icons/fi";
 
-import { usePathname, useRouter } from "next/navigation";
-import { FiHome, FiBox, FiFileText, FiSettings } from "react-icons/fi";
-
-// Sidebar nav items
 const navItems = [
-  { name: "Home", href: "/dashboard", icon: FiHome },
-  { name: "Products/Services", href: "/dashboard/products", icon: FiBox },
+  { name: "Home", href: "/Dashboard", icon: FiHome },
+  { name: "Products/Services", href: "/Dashboard/Products", icon: FiBox },
   { name: "Orders/Inquiries", href: "/dashboard/orders", icon: FiFileText },
   { name: "Settings", href: "/dashboard/settings", icon: FiSettings },
 ];
 
-export default function Sidebar() {
-  const pathname = usePathname();
+export default function Sidebar({ sidebarOpen }) {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
-    <aside className="w-64 shrink-0 bg-white border-r h-screen flex flex-col fixed left-0 top-0">
+    <aside
+      className={`fixed top-0 left-0 h-full bg-white border-r w-64 transform transition-transform 
+      ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 z-40`}
+    >
       {/* Logo */}
       <div className="px-6 py-6 flex items-center space-x-2">
         <div className="w-7 h-7 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold">
@@ -26,7 +32,7 @@ export default function Sidebar() {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-4 space-y-2">
+      <nav className="px-4 space-y-2">
         {navItems.map((item) => {
           const Icon = item.icon;
           const active = pathname === item.href;
@@ -34,13 +40,15 @@ export default function Sidebar() {
             <button
               key={item.name}
               onClick={() => router.push(item.href)}
-              className={`w-full flex items-center px-4 py-2 rounded-lg text-sm font-medium transition ${
+              className={`w-full flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
                 active
-                  ? "bg-emerald-600 text-white"
-                  : "text-gray-600 hover:bg-gray-100"
+                  ? "bg-emerald-600 text-white border-emerald-700"
+                  : "text-gray-600 border-transparent hover:bg-gray-100"
               }`}
             >
-              <Icon className="w-5 h-5 mr-3" />
+              <Icon
+                className={`w-5 h-5 mr-3 ${active ? "text-white" : "text-gray-600"}`}
+              />
               {item.name}
             </button>
           );

@@ -1,7 +1,46 @@
 "use client";
+import { useState } from "react";
 
-export default function AddListingModal({ isOpen, onClose }) {
+export default function AddListingModal({ isOpen, onClose, onAdded }) {
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("Category");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
+
   if (!isOpen) return null;
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => setImage(reader.result);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newListing = {
+      id: Date.now(),
+      title,
+      price: parseInt(price, 10),
+      category,
+      desc: description,
+      image: image || "https://picsum.photos/400/300", // fallback if no image
+    };
+
+    onAdded(newListing); // ✅ send new listing to parent
+    onClose(); // close modal after submit
+
+    // reset form
+    setTitle("");
+    setPrice("");
+    setCategory("Category");
+    setDescription("");
+    setImage(null);
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
@@ -17,34 +56,43 @@ export default function AddListingModal({ isOpen, onClose }) {
           </button>
         </div>
 
-        <p className="text-gray-500 mb-6">
-          Fill out the form below to add a new product or service
-        </p>
-
-        {/* Form */}
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
               type="text"
               placeholder="Product/Service Name"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+              required
             />
             <input
               type="number"
-              placeholder="Price (USD)"
+              placeholder="Price (₦)"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
               className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+              required
             />
           </div>
 
-          <select className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500">
-            <option>Category</option>
-            <option>Electronics</option>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+            required
+          >
+            <option value="Category" disabled>
+              Select Category
+            </option>
+            <option>Products</option>
             <option>Services</option>
-            <option>Clothing</option>
           </select>
 
           <textarea
             placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             rows="4"
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
           />
@@ -55,8 +103,15 @@ export default function AddListingModal({ isOpen, onClose }) {
             <p className="text-gray-400 text-sm mb-4">OR</p>
             <label className="inline-block bg-emerald-600 text-white px-4 py-2 rounded-lg cursor-pointer">
               Upload file
-              <input type="file" className="hidden" />
+              <input type="file" onChange={handleImageUpload} className="hidden" />
             </label>
+            {image && (
+              <img
+                src={image}
+                alt="preview"
+                className="mt-4 w-full h-32 object-cover rounded-md"
+              />
+            )}
           </div>
 
           {/* Actions */}

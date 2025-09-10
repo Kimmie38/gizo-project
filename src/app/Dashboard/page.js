@@ -1,18 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import {
-  FiHome,
-  FiBox,
-  FiFileText,
-  FiSettings,
-  FiBell,
-  FiShare2,
-  FiEye,
-  FiShoppingCart,
-  FiMenu,
-} from "react-icons/fi";
+import { FiBell, FiShare2, FiEye, FiShoppingCart, FiMenu, FiFileText } from "react-icons/fi";
 import {
   AreaChart,
   Area,
@@ -23,18 +12,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import AddListingModal from "./Listing/page";
-
-// Sidebar items
-const navItems = [
-  { name: "Home", href: "/dashboard", icon: FiHome },
-  { name: "Products/Services", href: "/dashboard/products", icon: FiBox },
-  { name: "Orders/Inquiries", href: "/dashboard/orders", icon: FiFileText },
-  { name: "Settings", href: "/dashboard/settings", icon: FiSettings },
-];
+import Sidebar from "@/components/sidebar";
 
 // Overview cards
 const cards = [
-  { title: "Products and Services", value: "24", subtitle: "Active Listings", icon: FiBox },
+  { title: "Products and Services", value: "24", subtitle: "Active Listings", icon: FiShoppingCart },
   { title: "Orders & Inquiries", value: "18", subtitle: "Pending responses", icon: FiShoppingCart },
   { title: "Profile Views", value: "1,123", subtitle: "Monthly Traffic", icon: FiEye },
 ];
@@ -51,49 +33,13 @@ const chartData = [
 ];
 
 export default function Dashboard() {
-  const router = useRouter();
-  const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showAddListing, setShowAddListing] = useState(false);
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 h-full bg-white border-r w-64 transform transition-transform ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 z-40`}
-      >
-        <div className="px-6 py-6 flex items-center space-x-2">
-          <div className="w-7 h-7 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold">
-            Q
-          </div>
-          <span className="font-semibold text-gray-800">Company name</span>
-        </div>
-
-        <nav className="px-4 space-y-2">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const active = pathname === item.href;
-            return (
-              <button
-                key={item.name}
-                onClick={() => router.push(item.href)}
-                className={`w-full flex items-center px-4 py-2 rounded-lg text-sm font-medium ${
-                  active
-                    ? "bg-emerald-600 text-white"
-                    : "text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                <Icon className="w-5 h-5 mr-3" />
-                {item.name}
-              </button>
-            );
-          })}
-        </nav>
-      </aside>
-
       {/* Main */}
+        <Sidebar sidebarOpen={sidebarOpen} />
       <div className="flex-1 flex flex-col md:ml-64">
         {/* Topbar */}
         <header className="px-4 pt-4 md:px-6 md:pt-6">

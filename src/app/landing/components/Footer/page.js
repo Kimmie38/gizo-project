@@ -45,11 +45,11 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-<footer className="bg-[#27312E] text-gray-300 py-12 px-6 md:px-16">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+    <footer className="bg-[#27312E] text-gray-300 py-10 px-4 sm:px-8 md:px-16">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {footerLinks.map((section, i) => (
           <div key={i}>
-            <h4 className="text-lg font-semibold text-white mb-4">
+            <h4 className="text-base sm:text-lg font-semibold text-white mb-4">
               {section.title}
             </h4>
             <ul className="space-y-2">
@@ -57,7 +57,7 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={link.href}
-                    className="hover:text-teal-400 transition"
+                    className="text-sm sm:text-base hover:text-teal-400 transition"
                   >
                     {link.name}
                   </Link>
@@ -66,6 +66,11 @@ export default function Footer() {
             </ul>
           </div>
         ))}
+      </div>
+
+      {/* Bottom note */}
+      <div className="mt-10 border-t border-gray-600 pt-6 text-center text-xs sm:text-sm text-gray-400">
+        © {new Date().getFullYear()} Your Company. All rights reserved.
       </div>
     </footer>
   );
