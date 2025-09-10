@@ -11,6 +11,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -83,18 +84,23 @@ export default function Signup() {
           {/* Stepper */}
           <div className="flex justify-center items-center space-x-6 mb-8">
             <div className="flex flex-col items-center">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-500 text-white font-bold">
-            <AiOutlineCheck className="text-lg" />
-            </div>
-            <p className="text-xs mt-2 font-medium text-black">Personal Information</p>
+              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-500 text-white font-bold">
+                <AiOutlineCheck className="text-lg" />
+              </div>
+              <p className="text-xs mt-2 font-medium text-black">
+                Personal Information
+              </p>
             </div>
 
-              <div className="flex flex-col items-center">
-                <div className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-500 text-white font-bold">
+            <div className="flex flex-col items-center">
+              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-500 text-white font-bold">
                 2
-                </div>
-                <p className="text-xs mt-2 text-emerald-500 font-medium">Business Information</p>
+              </div>
+              <p className="text-xs mt-2 text-emerald-500 font-medium">
+                Business Information
+              </p>
             </div>
+
             <div className="flex flex-col items-center">
               <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-emerald-500 text-emerald-500 font-bold">
                 3
@@ -120,6 +126,7 @@ export default function Signup() {
                 className="w-full px-4 py-3 rounded-md border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-black mb-1">
                 Business Email
@@ -130,6 +137,7 @@ export default function Signup() {
                 className="w-full px-4 py-3 rounded-md border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-black mb-1">
                 Business Phone Number
@@ -140,6 +148,48 @@ export default function Signup() {
                 className="w-full px-4 py-3 rounded-md border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
+
+            {/* Business Category Dropdown */}
+           <div>
+            <label className="block text-sm font-medium text-black mb-1">
+              Business Category
+            </label>
+            <div className="relative">
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full appearance-none px-4 py-3 pr-10 rounded-md border border-gray-300 text-black 
+                          bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 
+                          focus:border-emerald-500 cursor-pointer"
+              >
+                <option value="">Select</option>
+                <option value="Fashion">Fashion & Tailoring</option>
+                <option value="Food">Food & Catering</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Retail">Retail & Trading</option>
+                <option value="Tech">Tech & IT Services</option>
+                <option value="Logistics">Logistics & Transport</option>
+                <option value="Beauty">Beauty & Personal Care</option>
+                <option value="Education">Education & Training</option>
+                <option value="Construction">Construction</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Media">Media & Entertainment</option>
+                <option value="Finance">Finance & Consultancy</option>
+                <option value="Handicrafts">Handicrafts & Art</option>
+                <option value="Automobile">Automobile Services</option>
+                <option value="Cleaning">Cleaning & Laundry</option>
+                <option value="Event">Event Planning</option>
+                <option value="Printing">Printing & Publishing</option>
+                <option value="Other">Other</option>
+              </select>
+
+              {/* Chevron Icon */}
+              <span className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                ▼
+              </span>
+            </div>
+          </div>
+
             <div>
               <label className="block text-sm font-medium text-black mb-1">
                 Business Location

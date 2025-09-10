@@ -8,9 +8,9 @@ import wall from "../../../../public/wall.png"; // ✅ background
 export default function BusinessSocials() {
   const router = useRouter();
 
-  const handleNext = () => {
+  const handleNext = (e) => {
     e.preventDefault();
-    router.push("/signIN/login"); // ✅ after socials, go to login
+    router.push("/Dashboard"); // ✅ after socials, go to login
   };
 
   const handlePrevious = () => {
