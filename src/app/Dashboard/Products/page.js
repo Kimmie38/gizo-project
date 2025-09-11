@@ -27,7 +27,7 @@ const mockProducts = [
     title: "Delivery Service",
     price: 5000,
     desc: "Fast same-day delivery",
-    image: "https://picsum.photos/id/433/400/300",
+    image: "https://picsum.photos/id/292/400/300",
     category: "Services",
   },
 ];
@@ -47,7 +47,7 @@ export default function ProductsPage() {
   );
 
   return (
-    <div className="flex min-h-screen bg-gray-50 overflow-x-hidden">
+    <div className="flex min-h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
@@ -57,7 +57,8 @@ export default function ProductsPage() {
         <header className="px-3 pt-4 sm:px-4 md:px-6 md:pt-6">
           <div className="bg-white shadow-sm rounded-xl px-3 py-3 sm:px-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             {/* Left: Hamburger + Search */}
-            <div className="flex items-center gap-3 flex-1">
+            <div className="flex items-center gap-3 flex-1 w-full">
+              {/* Mobile Hamburger */}
               <button
                 className="p-2 rounded-md hover:bg-gray-100 md:hidden"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -65,12 +66,13 @@ export default function ProductsPage() {
                 <Menu className="w-6 h-6 text-gray-700" />
               </button>
 
+              {/* Search */}
               <input
                 type="text"
                 placeholder="Search your products or services"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="flex-1 px-3 py-2 rounded-full border text-sm focus:ring-2 focus:ring-emerald-500"
+                className="flex-1 px-3 py-2 rounded-full border text-sm focus:ring-2 focus:ring-emerald-500 w-full"
               />
             </div>
 
@@ -80,10 +82,10 @@ export default function ProductsPage() {
                 <button
                   key={cat}
                   onClick={() => setFilter(cat)}
-                  className={`px-3 sm:px-4 py-2 rounded-lg border text-sm whitespace-nowrap ${
+                  className={`px-3 sm:px-4 py-2 rounded-lg border text-sm whitespace-nowrap transition ${
                     filter === cat
                       ? "bg-emerald-600 text-white border-emerald-600"
-                      : "bg-gray-100 text-gray-700 border-gray-200"
+                      : "bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-200"
                   }`}
                 >
                   {cat}
@@ -91,7 +93,7 @@ export default function ProductsPage() {
               ))}
               <button
                 onClick={() => setShowAddListing(true)}
-                className="bg-emerald-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm whitespace-nowrap"
+                className="bg-emerald-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm whitespace-nowrap transition"
               >
                 + Add New Listing
               </button>
@@ -100,37 +102,38 @@ export default function ProductsPage() {
         </header>
 
         {/* Products Grid */}
-        <main className="flex-1 px-3 sm:px-4 md:px-6 mt-6">
-          {filtered.length === 0 ? (
-            <p className="text-gray-500 text-center">No items found</p>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-              {filtered.map((p) => (
-                <div
-                  key={p.id}
-                  className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col hover:shadow-lg transition"
-                >
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="w-full h-40 object-cover"
-                  />
-                  <div className="p-4 flex flex-col flex-1">
-                    <h3 className="font-semibold text-gray-800">{p.title}</h3>
-                    <p className="text-gray-500 text-sm flex-1">{p.desc}</p>
-                    <p className="text-emerald-600 font-bold mt-2">
-                      ₦{p.price.toLocaleString()}
-                    </p>
-                    <p className="text-xs text-gray-400">{p.category}</p>
-                    <button className="mt-auto bg-emerald-600 text-white rounded-lg py-2 hover:bg-emerald-700 transition">
-                      View More
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </main>
+<main className="flex-1 px-4 mt-6 md:px-6">
+  {filtered.length === 0 ? (
+    <p className="text-gray-500 text-center">No items found</p>
+  ) : (
+    <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">
+      {filtered.map((p) => (
+        <div
+          key={p.id}
+          className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition"
+        >
+          <img
+            src={p.image}
+            alt={p.title}
+            className="w-full h-28 object-cover"  // ✅ smaller image height
+          />
+          <div className="p-3 flex flex-col flex-1">  {/* ✅ smaller padding */}
+            <h3 className="font-semibold text-gray-800 text-sm">{p.title}</h3>
+            <p className="text-gray-500 text-xs flex-1">{p.desc}</p>
+            <p className="text-emerald-600 font-bold mt-1 text-sm">
+              ₦{p.price.toLocaleString()}
+            </p>
+            <p className="text-[10px] text-gray-400">{p.category}</p>
+            <button className="mt-2 bg-emerald-600 text-white rounded-md py-1 text-sm hover:bg-emerald-700">
+              View More
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</main>
+
       </div>
 
       {/* Modal */}
