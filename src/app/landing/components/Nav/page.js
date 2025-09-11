@@ -19,11 +19,11 @@ const Navbar = () => {
       {/* Desktop Links */}
       <div className="hidden md:flex gap-8 text-gray-700 font-medium">
         <Link href="/" className="hover:text-green-500 transition">Home</Link>
-        <Link href="/explore" className="hover:text-green-500 transition">Explore</Link>
-        <Link href="/about" className="hover:text-green-500 transition">About</Link>
-        <Link href="/pricing" className="hover:text-green-500 transition">Pricing</Link>
-        <Link href="/contact" className="hover:text-green-500 transition">Contact</Link>
-        <Link href="/cart" className="hover:text-green-500 transition">Cart</Link>
+        <Link href="/" className="hover:text-green-500 transition">Explore</Link>
+        <Link href="/" className="hover:text-green-500 transition">About</Link>
+        <Link href="/" className="hover:text-green-500 transition">Pricing</Link>
+        <Link href="/" className="hover:text-green-500 transition">Contact</Link>
+
       </div>
 
       {/* Buttons (Desktop) */}
@@ -34,7 +34,7 @@ const Navbar = () => {
           </button>
         </Link>
         <Link href="/signIN/signup">
-          <button className="px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+          <button className="px-5 py-2 bg-green-700 text-white rounded-lg hover:bg-green-600 transition">
             Sign Up
           </button>
         </Link>
@@ -54,11 +54,10 @@ const Navbar = () => {
           <div className="flex flex-col gap-4 px-6 py-6 text-gray-700 font-medium">
             {/* Links */}
             <Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">Home</Link>
-            <Link href="/explore" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">Explore</Link>
-            <Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">About</Link>
-            <Link href="/pricing" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">Pricing</Link>
-            <Link href="/contact" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">Contact</Link>
-            <Link href="/cart" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">Cart</Link>
+            <Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">Explore</Link>
+            <Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">About</Link>
+            <Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">Pricing</Link>
+            <Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-green-500 transition">Contact</Link>
 
             {/* Buttons */}
             <div className="flex flex-col gap-3 mt-6">
@@ -68,7 +67,7 @@ const Navbar = () => {
                 </button>
               </Link>
               <Link href="/signIN/signup" onClick={() => setMenuOpen(false)}>
-                <button className="w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+                <button className="w-full px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-600 transition">
                   Sign Up
                 </button>
               </Link>

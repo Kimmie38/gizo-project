@@ -1,26 +1,29 @@
 // app/page.jsx
+"use client";
 import React from "react";
 import { Check } from "lucide-react";
 
 const plans = [
   {
-    name: "Lite",
-    duration: "Valid for 2 months",
-    price: "$49.99",
-    features: ["Key Drivers", "Key Trends", "Visual charts", "PDF export", "Templates"],
+    label: "Monthly",
+    price: "₦100",
+    desc: "Grow your business, reach more customers",
+    features: [
+      "Promote Your Business",
+      "Showcase Products & Services",
+      "Grow Visibility",
+      "Connect with Customers",
+    ],
   },
   {
-    name: "Pro",
-    duration: "Valid for 12 months",
-    price: "$149.99",
+    label: "Yearly",
+    price: "₦1,100",
+    desc: "Grow your business, reach more customers",
     features: [
-      "Key Drivers",
-      "Key Trends",
-      "Visual charts",
-      "PDF export",
-      "Templates",
-      "Admin Tools",
-      "Services",
+      "Promote Your Business",
+      "Showcase Products & Services",
+      "Grow Visibility",
+      "Connect with Customers",
     ],
   },
 ];
@@ -37,39 +40,41 @@ export default function SubscriptionPage() {
       </p>
 
       {/* Pricing Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
         {plans.map((plan, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center border hover:shadow-lg transition"
+            className="bg-white rounded-2xl shadow-md p-6 flex flex-col border hover:shadow-lg transition"
           >
-            {/* Plan Name */}
-            <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
-              {plan.name}
-            </h3>
-            <p className="text-xs sm:text-sm text-gray-500 mb-4">
-              {plan.duration}
-            </p>
+            {/* Price & Badge */}
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900">
+                {plan.price}
+              </p>
+              <span className="bg-gradient-to-r from-teal-400 to-teal-500 text-white text-sm sm:text-base md:text-lg font-semibold px-5 py-2 rounded-full shadow">
+                {plan.label}
+              </span>
+            </div>
 
-            {/* Price */}
-            <p className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-              {plan.price}
+            {/* Description */}
+            <p className="text-sm sm:text-base text-gray-700 mb-6">
+              {plan.desc}
             </p>
-
-            {/* Button */}
-            <button className="bg-[#199A86] text-white px-6 py-2 rounded-lg hover:bg-teal-700 transition mb-6 w-full sm:w-[320px] md:w-[280px] lg:w-[360px]">
-              Choose Plan
-            </button>
 
             {/* Features */}
-            <ul className="space-y-2 text-gray-600 w-full text-sm sm:text-base">
+            <ul className="space-y-3 text-gray-600 flex-1">
               {plan.features.map((feature, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <Check size={18} className="text-teal-600" />
+                  <Check size={18} className="text-green-500" />
                   <span>{feature}</span>
                 </li>
               ))}
             </ul>
+
+            {/* Button */}
+            <button className="mt-6 bg-[#199A86] text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition w-full">
+              Subscribe
+            </button>
           </div>
         ))}
       </div>

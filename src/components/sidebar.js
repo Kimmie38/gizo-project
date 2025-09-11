@@ -24,7 +24,7 @@ export default function Sidebar({ sidebarOpen }) {
       ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 z-40`}
     >
       {/* Logo */}
-      <div className="px-6 py-6 flex items-center space-x-2">
+      <div className="px-6 py-10 flex items-center space-x-4">
         <div className="w-7 h-7 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold">
           Q
         </div>
@@ -32,7 +32,7 @@ export default function Sidebar({ sidebarOpen }) {
       </div>
 
       {/* Nav */}
-      <nav className="px-4 space-y-2">
+      <nav className="px-4 space-y-4">
         {navItems.map((item) => {
           const Icon = item.icon;
           const active = pathname === item.href;

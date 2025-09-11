@@ -6,26 +6,26 @@ import { Bookmark, Share2 } from "lucide-react";
 const stores = [
   {
     id: 1,
-    name: "The Coffee Shack",
+    name: "Nourished Fruits",
     address: "123 Brew Street",
     logo: "/images/elipse.png",
-    preview: "/images/frame.png",
+    preview: "/images/frame1.png",
     desc: "Description of the business and the services they offer. You can keep this fairly short.",
   },
   {
     id: 2,
-    name: "The Coffee Shack",
+    name: "Exotic Fabrics",
     address: "123 Brew Street",
     logo: "/images/elipse.png",
-    preview: "/images/frame.png",
+    preview: "/images/Frame2.png",
     desc: "Description of the business and the services they offer. You can keep this fairly short.",
   },
   {
     id: 3,
-    name: "The Coffee Shack",
+    name: "Fashion Design",
     address: "123 Brew Street",
     logo: "/images/elipse.png",
-    preview: "/images/frame.png",
+    preview: "/images/Frame4.png",
     desc: "Description of the business and the services they offer. You can keep this fairly short.",
   },
   {
