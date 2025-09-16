@@ -33,7 +33,7 @@ export default function SubscriptionPage() {
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4 py-12">
       {/* Title */}
       <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2 text-center">
-        Subscription
+        Pricing
       </h2>
       <p className="text-gray-500 mb-10 text-center text-sm md:text-base">
         Choose the plan that best fits your needs

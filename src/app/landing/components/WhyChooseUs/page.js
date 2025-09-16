@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { CheckCircleIcon } from "@heroicons/react/24/solid"; // make sure @heroicons/react is installed
 
-const features = ["Community Business", "Trusted", "Linkages", "Easy to use"];
+const features = ["Community Business", "Trusted", "Easy to use"];
 
 const WhyChooseUs = () => {
   return (
@@ -10,13 +10,13 @@ const WhyChooseUs = () => {
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Left Image */}
         <div className="flex justify-center">
-          <Image
-            src="/images/smartphone.png" // place inside /public/images/
-            alt="People discussing"
-            width={350}
-            height={450}
-            className="w-60 sm:w-72 md:w-80 lg:w-[350px] h-auto object-contain"
-          />
+           <Image
+          src="/images/bg-image2.png"
+          alt="People discussing"
+          width={600}   // increased default width
+          height={700}  // increased default height
+          className="w-72 sm:w-96 md:w-[420px] lg:w-[500px] h-auto object-contain"
+        />
         </div>
 
         {/* Right Content */}

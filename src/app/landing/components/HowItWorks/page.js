@@ -19,9 +19,15 @@ const steps = [
   },
 ];
 
+const partners = [
+  { src: "/icons/giz.png", alt: "GIZ" },
+  { src: "/icons/nHub.png", alt: "NY Foundation" },
+  // 👉 add more logos here when you have them
+];
+
 const HowItWorks = () => {
   return (
-    <section className="py-14 sm:py-20 bg-gray-50">
+    <section className="py-14 sm:py-20 bg-white">
       {/* Header */}
       <div className="text-center mb-12 px-4">
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
@@ -61,6 +67,30 @@ const HowItWorks = () => {
             </p>
           </div>
         ))}
+      </div>
+
+      {/* Partners Section */}
+      <div className="mt-20 text-center px-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+          Our Partners
+        </h2>
+        <p className="text-gray-600 text-sm sm:text-base mt-2">
+          Here are our trusted partners
+        </p>
+
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-10">
+          {partners.map((partner, index) => (
+            <div key={index} className="h-20 w-auto flex items-center">
+              <Image
+                src={partner.src}
+                alt={partner.alt}
+                width={170}
+                height={120}
+                className="object-contain"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

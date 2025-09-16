@@ -1,36 +1,37 @@
 import React from "react";
-import SearchBar from "../SearchBar/page";
-import Image from "next/image";
 
 const Hero = () => {
   return (
-    <section className="flex flex-col-reverse md:flex-row items-center justify-between px-6 sm:px-10 lg:px-16 py-12 sm:py-20 bg-gray-50">
-      {/* Left Content */}
-      <div className="w-full md:w-1/2 max-w-xl text-center md:text-left mt-10 md:mt-0">
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-snug">
-          Explore Your City
+        <section
+      className="relative flex flex-col-reverse md:flex-row items-center justify-between px-6 sm:px-10 lg:px-16 py-12 sm:py-20"
+      style={{
+        backgroundImage: "url('/images/bg-image.jpg')", // <-- your bg image
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Dark Overlay for readability */}
+      <div className="absolute inset-0 bg-black/40 z-0"></div>
+      {/* Content (left aligned) */}
+      <div className="relative z-10 max-w-xl text-white">
+        <h1 className="text-3xl sm:text-5xl font-bold leading-snug">
+          Give Your Business the{" "}
+          <span className="text-teal-400">Visibility</span> It Deserves.
         </h1>
-        <ul className="mt-6 text-gray-600 space-y-3 text-sm sm:text-base">
-          <li>• Welcome to Nigeria&apos;s foremost digital marketplace.</li>
-          <li>• Search for Products or Services hassle-free.</li>
-        </ul>
+        <p className="mt-4 text-base sm:text-lg text-gray-200">
+          Connect with customers, showcase your products and services, and grow
+          your MSME with our easy-to-use platform.
+        </p>
 
-        {/* Search Bar */}
-        <div className="mt-8 w-full max-w-md mx-auto md:mx-0">
-          <SearchBar />
+        {/* Buttons */}
+        <div className="mt-6 flex gap-4">
+          <button className="px-6 py-3 bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">
+            Market place
+          </button>
+          <button className="px-6 py-3 bg-teal-500 text-white rounded-lg shadow hover:bg-teal-600">
+            Sign Up
+          </button>
         </div>
-      </div>
-
-      {/* Right Image */}
-      <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-        <Image
-          src="/images/business.png"
-          alt="Hero Illustration"
-          width={500}
-          height={500}
-          className="w-56 sm:w-72 md:w-80 lg:w-[420px] h-auto drop-shadow-lg"
-          priority
-        />
       </div>
     </section>
   );
