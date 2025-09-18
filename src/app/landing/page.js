@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Navbar from "./components/Nav";
 import Hero from "./components/Hero";
-import HowItWorks from "./components/HowitWorks";
+import HowItWorks from "./components/HowItWorks";
 import WhyChooseUs from "./components/WhyChooseUs";
 import FeaturedStores from "./components/FeaturedStores";
 import SubscriptionPage from "./SubscriptionPage";
