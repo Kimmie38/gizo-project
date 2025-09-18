@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -25,9 +26,12 @@ const Hero = () => {
 
         {/* Buttons */}
         <div className="mt-6 flex gap-4">
+
+            <Link href="/services">
           <button className="px-6 py-3 bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">
             Market place
           </button>
+          </Link>
           <button className="px-6 py-3 bg-teal-500 text-white rounded-lg shadow hover:bg-teal-600">
             Sign Up
           </button>

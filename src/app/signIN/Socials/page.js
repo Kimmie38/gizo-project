@@ -27,7 +27,7 @@ export default function BusinessSocials() {
         src={wall}
         alt="Background Wall"
         fill
-        className="object-cover opacity-20" // ✅ subtle overlay
+        className="object-cover opacity-10"
         priority
       />
 

@@ -5,7 +5,6 @@ import Hero from "./components/Hero/page";
 import WhyChooseUs from "./components/WhyChooseUs/page";
 import HowItWorks from "./components/HowItWorks/page";
 import SubscriptionPage from "./Subscription/page";
-import Contact from "./components/Contact/page";
 import Footer from "./components/Footer/page";
 const Landing = () => {
   return (
@@ -15,7 +14,6 @@ const Landing = () => {
       <WhyChooseUs/>
       <HowItWorks/>
       <SubscriptionPage/>
-      <Contact/>
       <Footer/>
     </main>
   );
