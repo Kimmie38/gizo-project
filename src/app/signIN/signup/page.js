@@ -6,22 +6,88 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 export default function Signup() {
   const router = useRouter();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleNext = (e) => {
-    e.preventDefault();
-    router.push("/signIN/Details");
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (formData.password !== formData.confirmPassword) {
+    setError("Passwords do not match!");
+    return;
+  }
+
+  setLoading(true);
+  setError("");
+  setSuccess("");
+
+  // Debug: show API URL and request payload
+  console.log("➡️ API URL:", process.env.NEXT_PUBLIC_BACKEND_URL);
+  console.log("➡️ Sending signup data:", {
+    fullName: formData.fullName,
+    email: formData.email,
+    password: formData.password,
+  });
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user`, // use env var
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+        }),
+      }
+    );
+
+    let data;
+    try {
+      data = await res.json();
+    } catch (err) {
+      console.error("⚠️ Non-JSON response from server:", await res.text());
+      setError("Server returned unexpected response. Try again later.");
+      return;
+    }
+
+    if (res.ok) {
+      setSuccess("✅ Signup successful!");
+      setFormData({ fullName: "", email: "", password: "", confirmPassword: "" });
+      setTimeout(() => router.push("/signIN/Details"), 1000);
+    } else {
+      console.error("❌ Signup failed:", data);
+      setError(data.message || "Signup failed. Please try again.");
+    }
+  } catch (err) {
+    console.error("🌐 Network error:", err);
+    setError("Network error. Please try again later.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div
       className="min-h-screen flex items-center justify-center 
       bg-gradient-to-r from-[#0f172a] via-[#1e3a8a] to-[#4c1d95] animate-gradient px-4"
     >
-      {/* Card */}
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 md:p-10">
-        {/* Heading */}
         <h1 className="text-3xl font-bold text-center mb-2 text-black">
           Create Account
         </h1>
@@ -60,32 +126,45 @@ export default function Signup() {
           Personal Information
         </h2>
 
-        {/* Form */}
-        <form className="space-y-5" onSubmit={handleNext}>
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
+
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          {/* Full Name */}
           <div>
             <label className="block text-sm font-medium text-black mb-1">
               Full Name
             </label>
             <input
               type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
               placeholder="Full Name"
               className="w-full px-4 py-3 rounded-md border border-gray-300 text-black 
                          placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              required
             />
           </div>
 
+          {/* Email */}
           <div>
             <label className="block text-sm font-medium text-black mb-1">
               Email
             </label>
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Email"
               className="w-full px-4 py-3 rounded-md border border-gray-300 text-black 
                          placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              required
             />
           </div>
 
+          {/* Password */}
           <div>
             <label className="block text-sm font-medium text-black mb-1">
               Password
@@ -93,9 +172,13 @@ export default function Signup() {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Password"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 text-black 
                            placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                required
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
@@ -110,6 +193,7 @@ export default function Signup() {
             </div>
           </div>
 
+          {/* Confirm Password */}
           <div>
             <label className="block text-sm font-medium text-black mb-1">
               Confirm Password
@@ -117,9 +201,13 @@ export default function Signup() {
             <div className="relative">
               <input
                 type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
                 placeholder="Confirm Password"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 text-black 
                            placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                required
               />
               <span
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -136,27 +224,23 @@ export default function Signup() {
 
           <button
             type="submit"
+            disabled={loading}
             className="w-full mt-4 py-3 rounded-md font-medium text-sm md:text-base 
                        bg-emerald-500 hover:bg-emerald-600 text-white transition"
           >
-            Next
+            {loading ? "Creating Account..." : "Next"}
           </button>
         </form>
 
-        {/* Divider */}
         <div className="flex items-center my-6">
           <hr className="flex-grow border-gray-300" />
           <span className="px-2 text-sm text-gray-400">or</span>
           <hr className="flex-grow border-gray-300" />
         </div>
 
-        {/* Sign in link */}
         <p className="text-center text-sm text-gray-500">
           Already have an account?{" "}
-          <a
-            href="/signIN/login"
-            className="text-emerald-500 hover:underline"
-          >
+          <a href="/signIN/login" className="text-emerald-500 hover:underline">
             Sign In
           </a>
         </p>
