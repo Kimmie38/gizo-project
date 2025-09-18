@@ -8,7 +8,7 @@ const stores = [
   {
     id: 1,
     name: "The Coffee Shack",
-    address: "Address",
+    address: "Address", 
     logo: "/images/elipse.png", // put inside /public/images/
     preview: "/images/frame.png", // put inside /public/images/
     desc: "Description of the business and the services they offer. You can keep this fairly short.",
