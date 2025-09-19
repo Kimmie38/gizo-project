@@ -3,14 +3,12 @@ import { useRouter, usePathname } from "next/navigation";
 import {
   FiHome,
   FiBox,
-  FiFileText,
   FiSettings,
 } from "react-icons/fi";
 
 const navItems = [
   { name: "Home", href: "/Dashboard", icon: FiHome },
   { name: "Products/Services", href: "/Dashboard/Products", icon: FiBox },
-  { name: "Orders/Inquiries", href: "/dashboard/orders", icon: FiFileText },
   { name: "Settings", href: "/dashboard/settings", icon: FiSettings },
 ];
 

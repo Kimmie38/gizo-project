@@ -58,6 +58,7 @@ const chartData = [
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showAddListing, setShowAddListing] = useState(false);
+  const [listings, setListings] = useState([]); // ✅ plain JS, no <any[]>
   const router = useRouter();
 
   return (
@@ -91,7 +92,7 @@ export default function Dashboard() {
               <FiBell className="w-5 h-5 text-gray-600 cursor-pointer" />
               <FiShare2 className="w-5 h-5 text-gray-600 cursor-pointer" />
 
-              {/* Profile - hidden on very small screens */}
+              {/* Profile */}
               <div className="hidden sm:flex items-center space-x-2">
                 <div className="w-8 h-8 rounded-full bg-emerald-700 shrink-0"></div>
                 <div className="hidden md:block">
@@ -226,15 +227,45 @@ export default function Dashboard() {
                   <div className="flex items-center mb-2">
                     <FiFileText className="w-5 h-5 text-emerald-600 mr-3" />
                     <span className="font-semibold text-gray-800">
-                      View Orders/Inquiries
+                      Subscription
                     </span>
                   </div>
-                  <p className="text-sm text-gray-500">
-                    Review every order placed
-                  </p>
+                  <p className="text-sm text-gray-500">Subscribe to begin</p>
                 </button>
               </div>
             </section>
+
+            {/* Listings Grid */}
+            {listings.length > 0 && (
+              <section className="mb-12">
+                <h2 className="text-base md:text-lg font-bold mb-3 md:mb-4">
+                  Your Listings
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                  {listings.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-32 object-cover"
+                      />
+                      <div className="p-3">
+                        <h3 className="font-semibold text-gray-800 text-sm">
+                          {item.title}
+                        </h3>
+                        <p className="text-gray-500 text-xs">{item.desc}</p>
+                        <p className="text-emerald-600 font-bold mt-1 text-sm">
+                          ₦{item.price?.toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
         </main>
       </div>
@@ -243,9 +274,9 @@ export default function Dashboard() {
       <AddListingModal
         isOpen={showAddListing}
         onClose={() => setShowAddListing(false)}
-        onAdded={() => {
+        onAdded={(newItem) => {
           setShowAddListing(false);
-          router.push("/Dashboard/Products");
+          setListings((prev) => [...prev, newItem]); 
         }}
       />
     </div>
