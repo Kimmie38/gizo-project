@@ -36,6 +36,25 @@ export default function ProductsPage() {
   const [showAddListing, setShowAddListing] = useState(false);
   const [products, setProducts] = useState(mockProducts);
   const [search, setSearch] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  // ✅ Assume slug is stored for logged-in user (hardcoded for demo)
+  const slug = "techbiz-solutions"; // replace with actual user.slug from backend
+  const profileUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/${slug}`
+      : "";
+
+  // ✅ Clipboard function
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(profileUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("❌ Failed to copy:", err);
+    }
+  };
 
   // ✅ Search filter only
   const filtered = products.filter((p) =>
@@ -73,8 +92,18 @@ export default function ProductsPage() {
               <button className="p-2 rounded-full hover:bg-gray-100">
                 <Bell className="w-5 h-5 text-gray-600" />
               </button>
-              <button className="p-2 rounded-full hover:bg-gray-100">
+
+              {/* ✅ Share Business Link button */}
+              <button
+                onClick={handleCopy}
+                className="p-2 rounded-full hover:bg-gray-100 relative"
+              >
                 <Share2 className="w-5 h-5 text-gray-600" />
+                {copied && (
+                  <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-black text-white text-xs rounded px-2 py-1">
+                    Copied!
+                  </span>
+                )}
               </button>
 
               {/* Profile */}

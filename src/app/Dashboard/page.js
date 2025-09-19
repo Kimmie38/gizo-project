@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   FiBell,
@@ -21,6 +21,7 @@ import {
 } from "recharts";
 import AddListingModal from "@/components/AddlistingModal";
 import Sidebar from "@/components/sidebar";
+import ProductGrid from "@/components/ProductGrid";
 
 // Overview cards
 const cards = [
@@ -58,8 +59,49 @@ const chartData = [
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showAddListing, setShowAddListing] = useState(false);
-  const [listings, setListings] = useState([]); // ✅ plain JS, no <any[]>
+  const [listings, setListings] = useState([]);
+  const [copied, setCopied] = useState(false);
+  const [userSlug, setUserSlug] = useState("");
+  const [origin, setOrigin] = useState("");
   const router = useRouter();
+
+  // Load slug + window origin on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedSlug = localStorage.getItem("userSlug");
+      if (storedSlug) setUserSlug(storedSlug);
+      setOrigin(window.location.origin);
+    }
+  }, []);
+
+  const shareableLink = userSlug ? `${origin}/u/${userSlug}` : "";
+
+  // ✅ Smart share handler
+  const handleShare = async () => {
+    if (!shareableLink) return;
+
+    if (navigator.share) {
+      // Mobile native share
+      try {
+        await navigator.share({
+          title: "My Business Profile",
+          text: "Check out my marketplace profile!",
+          url: shareableLink,
+        });
+      } catch (err) {
+        console.error("❌ Share cancelled or failed:", err);
+      }
+    } else {
+      // Desktop fallback: copy to clipboard
+      try {
+        await navigator.clipboard.writeText(shareableLink);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        console.error("❌ Failed to copy:", err);
+      }
+    }
+  };
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -73,7 +115,6 @@ export default function Dashboard() {
           <div className="bg-white shadow-sm rounded-xl px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 flex justify-between items-center">
             {/* Left: Menu + Search */}
             <div className="flex items-center gap-2 sm:gap-3 flex-1 max-w-md">
-              {/* Mobile toggle */}
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className="md:hidden text-gray-600"
@@ -90,7 +131,19 @@ export default function Dashboard() {
             {/* Right */}
             <div className="flex items-center space-x-3 sm:space-x-4 ml-3 sm:ml-4">
               <FiBell className="w-5 h-5 text-gray-600 cursor-pointer" />
-              <FiShare2 className="w-5 h-5 text-gray-600 cursor-pointer" />
+
+              {/* Share icon in topbar */}
+              <div
+                onClick={handleShare}
+                className="cursor-pointer flex items-center"
+              >
+                <FiShare2 className="w-5 h-5 text-gray-600" />
+                {copied && (
+                  <span className="ml-2 text-xs text-emerald-600 font-semibold">
+                    ✅ Copied!
+                  </span>
+                )}
+              </div>
 
               {/* Profile */}
               <div className="hidden sm:flex items-center space-x-2">
@@ -209,20 +262,28 @@ export default function Dashboard() {
                   <p className="text-sm opacity-90">List a new offer</p>
                 </button>
 
-                {/* Share */}
-                <button className="bg-white border rounded-xl p-4 md:p-6 text-left hover:shadow-md">
+                {/* Share Business Link */}
+                <button
+                  onClick={handleShare}
+                  className="bg-white border rounded-xl p-4 md:p-6 text-left hover:shadow-md"
+                >
                   <div className="flex items-center mb-2">
                     <FiShare2 className="w-5 h-5 text-emerald-600 mr-3" />
                     <span className="font-semibold text-gray-800">
-                      Share Business Link
+                      {copied ? "✅ Link Copied!" : "Share Business Link"}
                     </span>
                   </div>
                   <p className="text-sm text-gray-500">
                     Get your unique marketplace URL
                   </p>
+                  {shareableLink && (
+                    <p className="mt-2 text-xs text-emerald-600 break-all">
+                      {shareableLink}
+                    </p>
+                  )}
                 </button>
 
-                {/* Orders */}
+                {/* Subscription */}
                 <button className="bg-white border rounded-xl p-4 md:p-6 text-left hover:shadow-md">
                   <div className="flex items-center mb-2">
                     <FiFileText className="w-5 h-5 text-emerald-600 mr-3" />
@@ -276,7 +337,7 @@ export default function Dashboard() {
         onClose={() => setShowAddListing(false)}
         onAdded={(newItem) => {
           setShowAddListing(false);
-          setListings((prev) => [...prev, newItem]); 
+          setListings((prev) => [...prev, newItem]);
         }}
       />
     </div>

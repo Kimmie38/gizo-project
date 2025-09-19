@@ -21,72 +21,60 @@ export default function Signup() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-const handleSubmit = async (e) => {
-  e.preventDefault();
 
-  if (formData.password !== formData.confirmPassword) {
-    setError("Passwords do not match!");
-    return;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  setLoading(true);
-  setError("");
-  setSuccess("");
-
-  // Debug: show API URL and request payload
-  console.log("➡️ API URL:", process.env.NEXT_PUBLIC_BACKEND_URL);
-  console.log("➡️ Sending signup data:", {
-    fullName: formData.fullName,
-    email: formData.email,
-    password: formData.password,
-  });
-
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user`, // use env var
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          password: formData.password,
-        }),
-      }
-    );
-
-    let data;
-    try {
-      data = await res.json();
-    } catch (err) {
-      console.error("⚠️ Non-JSON response from server:", await res.text());
-      setError("Server returned unexpected response. Try again later.");
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match!");
       return;
     }
 
-    if (res.ok) {
-      setSuccess("✅ Signup successful!");
-      setFormData({ fullName: "", email: "", password: "", confirmPassword: "" });
-      setTimeout(() => router.push("/signIN/Details"), 1000);
-    } else {
-      console.error("❌ Signup failed:", data);
-      setError(data.message || "Signup failed. Please try again.");
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fullName: formData.fullName,
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        // ✅ save slug for later use
+        localStorage.setItem("userSlug", data.user.slug);
+
+        setSuccess("✅ Signup successful!");
+        setFormData({ fullName: "", email: "", password: "", confirmPassword: "" });
+
+        // 👉 Redirect to details page (step 2 of registration)
+        setTimeout(() => {
+          router.push("/signIN/Details");
+        }, 1000);
+      } else {
+        setError(data.message || "Signup failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("🌐 Network error:", err);
+      setError("Network error. Please try again later.");
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error("🌐 Network error:", err);
-    setError("Network error. Please try again later.");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center 
-      bg-gradient-to-r from-[#0f172a] via-[#1e3a8a] to-[#4c1d95] animate-gradient px-4"
-    >
+    <div className="min-h-screen flex items-center justify-center 
+      bg-gradient-to-r from-[#0f172a] via-[#1e3a8a] to-[#4c1d95] animate-gradient px-4">
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 md:p-10">
         <h1 className="text-3xl font-bold text-center mb-2 text-black">
           Create Account
@@ -95,37 +83,7 @@ const handleSubmit = async (e) => {
           Get started by setting up your account.
         </p>
 
-        {/* Stepper */}
-        <div className="flex justify-center items-center space-x-6 mb-8">
-          <div className="flex flex-col items-center">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-500 text-white font-bold">
-              1
-            </div>
-            <p className="text-xs mt-2 font-medium text-black">
-              Personal Information
-            </p>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-emerald-500 text-emerald-500 font-bold">
-              2
-            </div>
-            <p className="text-xs mt-2 text-emerald-500">
-              Business Information
-            </p>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-emerald-500 text-emerald-500 font-bold">
-              3
-            </div>
-            <p className="text-xs mt-2 text-emerald-500">Business Socials</p>
-          </div>
-        </div>
-
-        {/* Section Title */}
-        <h2 className="text-lg font-semibold mb-4 text-black">
-          Personal Information
-        </h2>
-
+        {/* errors */}
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
 
@@ -142,7 +100,7 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
               placeholder="Full Name"
               className="w-full px-4 py-3 rounded-md border border-gray-300 text-black 
-                         placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               required
             />
           </div>
@@ -159,7 +117,7 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
               placeholder="Email"
               className="w-full px-4 py-3 rounded-md border border-gray-300 text-black 
-                         placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               required
             />
           </div>
@@ -177,7 +135,7 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
                 placeholder="Password"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 text-black 
-                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 required
               />
               <span
@@ -206,7 +164,7 @@ const handleSubmit = async (e) => {
                 onChange={handleChange}
                 placeholder="Confirm Password"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 text-black 
-                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 required
               />
               <span
@@ -226,24 +184,11 @@ const handleSubmit = async (e) => {
             type="submit"
             disabled={loading}
             className="w-full mt-4 py-3 rounded-md font-medium text-sm md:text-base 
-                       bg-emerald-500 hover:bg-emerald-600 text-white transition"
+              bg-emerald-500 hover:bg-emerald-600 text-white transition"
           >
             {loading ? "Creating Account..." : "Next"}
           </button>
         </form>
-
-        <div className="flex items-center my-6">
-          <hr className="flex-grow border-gray-300" />
-          <span className="px-2 text-sm text-gray-400">or</span>
-          <hr className="flex-grow border-gray-300" />
-        </div>
-
-        <p className="text-center text-sm text-gray-500">
-          Already have an account?{" "}
-          <a href="/signIN/login" className="text-emerald-500 hover:underline">
-            Sign In
-          </a>
-        </p>
       </div>
     </div>
   );

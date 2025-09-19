@@ -2,11 +2,12 @@
 import { useState } from "react";
 
 export default function AddListingModal({ isOpen, onClose, onAdded }) {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("Category");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
 
@@ -19,27 +20,49 @@ export default function AddListingModal({ isOpen, onClose, onAdded }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const newListing = {
-      id: Date.now(),
-      title,
+      name, // ✅ backend expects name
       price: parseInt(price, 10),
       category,
-      desc: description,
-      image: image || "https://picsum.photos/400/300", // fallback if no image
+      description, // ✅ backend expects description
+      image: image || "https://picsum.photos/400/300",
     };
 
-    onAdded(newListing); // ✅ send new listing to parent
-    onClose(); // close modal after submit
+    try {
+      const res = await fetch("https://kasuwa-gizo-backend.onrender.com/kasuwa/product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newListing),
+      });
 
-    // reset form
-    setTitle("");
-    setPrice("");
-    setCategory("Category");
-    setDescription("");
-    setImage(null);
+      const data = await res.json();
+      console.log("📦 Product response:", data);
+
+      if (res.ok && data.success) {
+        alert("✅ Product added successfully!");
+        onAdded?.(data.product); // optional: notify parent
+        onClose();
+      } else {
+        alert(`❌ Error: ${data.message || "Something went wrong"}`);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("⚠️ Failed to reach the server");
+    } finally {
+      setLoading(false);
+      // reset form
+      setName("");
+      setPrice("");
+      setCategory("Category");
+      setDescription("");
+      setImage(null);
+    }
   };
 
   return (
@@ -61,8 +84,8 @@ export default function AddListingModal({ isOpen, onClose, onAdded }) {
             <input
               type="text"
               placeholder="Product/Service Name"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
               required
             />
@@ -95,6 +118,7 @@ export default function AddListingModal({ isOpen, onClose, onAdded }) {
             onChange={(e) => setDescription(e.target.value)}
             rows="4"
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+            required
           />
 
           {/* Upload */}
@@ -118,9 +142,10 @@ export default function AddListingModal({ isOpen, onClose, onAdded }) {
           <div className="flex flex-col sm:flex-row gap-3 justify-end">
             <button
               type="submit"
+              disabled={loading}
               className="bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700"
             >
-              Add Listing
+              {loading ? "Adding..." : "Add Listing"}
             </button>
             <button
               type="button"
