@@ -14,9 +14,7 @@ export default function AddListingModal({ isOpen, onClose, onAdded }) {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setImage(reader.result);
-      reader.readAsDataURL(file);
+      setImage(file); // store file itself
     }
   };
 
@@ -24,29 +22,30 @@ export default function AddListingModal({ isOpen, onClose, onAdded }) {
     e.preventDefault();
     setLoading(true);
 
-    const newListing = {
-      name, // ✅ backend expects name
-      price: parseInt(price, 10),
-      category,
-      description, // ✅ backend expects description
-      image: image || "https://picsum.photos/400/300",
-    };
-
     try {
-      const res = await fetch("https://kasuwa-gizo-backend.onrender.com/kasuwa/product", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newListing),
-      });
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("price", price);
+      formData.append("category", category);
+      formData.append("description", description);
+      if (image) {
+        formData.append("image", image); // actual file
+      }
+
+      const res = await fetch(
+        "https://kasuwa-gizo-backend.onrender.com/kasuwa/product",
+        {
+          method: "POST",
+          body: formData, // no JSON.stringify here
+        }
+      );
 
       const data = await res.json();
       console.log("📦 Product response:", data);
 
       if (res.ok && data.success) {
         alert("✅ Product added successfully!");
-        onAdded?.(data.product); // optional: notify parent
+        onAdded?.(data.product);
         onClose();
       } else {
         alert(`❌ Error: ${data.message || "Something went wrong"}`);
@@ -131,7 +130,7 @@ export default function AddListingModal({ isOpen, onClose, onAdded }) {
             </label>
             {image && (
               <img
-                src={image}
+                src={URL.createObjectURL(image)}
                 alt="preview"
                 className="mt-4 w-full h-32 object-cover rounded-md"
               />

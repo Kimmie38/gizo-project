@@ -148,39 +148,41 @@ export default function ProductsPage() {
           </h3>
 
           {/* Products Grid inside container */}
-          <div className="bg-white rounded-xl shadow-sm p-4">
-            {filtered.length === 0 ? (
-              <p className="text-gray-500 text-center">No items found</p>
-            ) : (
-              <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(180px,1fr))]">
-                {filtered.map((p) => (
-                  <div
-                    key={p.id}
-                    className="bg-white border rounded-lg overflow-hidden flex flex-col hover:shadow transition"
-                  >
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full h-28 object-cover"
-                    />
-                    <div className="p-3 flex flex-col flex-1">
-                      <h3 className="font-semibold text-gray-800 text-sm">
-                        {p.title}
-                      </h3>
-                      <p className="text-gray-500 text-xs flex-1">{p.desc}</p>
-                      <p className="text-emerald-600 font-bold mt-1 text-sm">
-                        ₦{p.price.toLocaleString()}
-                      </p>
-                      <p className="text-[10px] text-gray-400">{p.category}</p>
-                      <button className="mt-2 bg-emerald-600 text-white rounded-md py-1 text-sm hover:bg-emerald-700">
-                        View More
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+<div className="bg-white rounded-xl shadow-sm p-4">
+  {filtered.length === 0 ? (
+    <p className="text-gray-500 text-center">No items found</p>
+  ) : (
+    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {filtered.map((p) => (
+        <div
+          key={p.id}
+          className="bg-white border rounded-lg overflow-hidden flex flex-col hover:shadow transition"
+        >
+          <img
+            src={p.image}
+            alt={p.title}
+            className="w-full h-40 object-cover"
+          />
+          <div className="p-4 flex flex-col flex-1">
+            <h3 className="font-semibold text-gray-800 text-base">
+              {p.title}
+            </h3>
+            <p className="text-gray-500 text-sm flex-1">{p.desc}</p>
+            <p className="text-emerald-600 font-bold mt-2 text-sm">
+              ₦{p.price.toLocaleString()}
+            </p>
+            <p className="text-[11px] text-gray-400">{p.category}</p>
+            <button className="mt-3 bg-emerald-600 text-white rounded-md py-2 text-sm hover:bg-emerald-700">
+              View More
+            </button>
           </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+
         </main>
       </div>
 
