@@ -2,7 +2,7 @@
 import React from "react";
 import BusinessCard from "../BussinessCard/page";
 
-export default function TopBusinesses({ businesses }) {
+export default function TopBusinesses({ businesses = [] }) {
   return (
     <section className="w-full bg-gray-50 p-4 md:p-6 rounded-lg">
       {/* Header */}
@@ -18,9 +18,11 @@ export default function TopBusinesses({ businesses }) {
 
       {/* Grid of Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {businesses.map((biz, index) => (
-          <BusinessCard key={index} {...biz} />
-        ))}
+        {businesses.length > 0 ? (
+          businesses.map((biz, index) => <BusinessCard key={index} {...biz} />)
+        ) : (
+          <p className="text-gray-500">No businesses available</p>
+        )}
       </div>
     </section>
   );
