@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 
 export default function ProductGrid({ products }) {
   if (!products || products.length === 0) {
@@ -13,9 +14,11 @@ export default function ProductGrid({ products }) {
           key={p.id}
           className="bg-white border rounded-lg overflow-hidden flex flex-col hover:shadow transition"
         >
-          <img
+          <Image
             src={p.image}
             alt={p.title}
+            width={400}       // ✅ required
+            height={112}      // ~h-28 (112px)
             className="w-full h-28 object-cover"
           />
           <div className="p-3 flex flex-col flex-1">

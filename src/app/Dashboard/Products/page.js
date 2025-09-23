@@ -3,6 +3,7 @@ import { useState } from "react";
 import AddListingModal from "@/components/AddlistingModal";
 import Sidebar from "@/components/sidebar";
 import { Menu, Bell, Share2 } from "lucide-react";
+import Image from "next/image";
 
 const mockProducts = [
   {
@@ -158,11 +159,13 @@ export default function ProductsPage() {
           key={p.id}
           className="bg-white border rounded-lg overflow-hidden flex flex-col hover:shadow transition"
         >
-          <img
-            src={p.image}
-            alt={p.title}
-            className="w-full h-40 object-cover"
-          />
+                <Image
+          src={p.image}
+          alt={p.title}
+          width={400}     // required
+          height={300}    // required
+          className="w-full h-40 object-cover"
+        />
           <div className="p-4 flex flex-col flex-1">
             <h3 className="font-semibold text-gray-800 text-base">
               {p.title}

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 const mockProducts = [
   {
@@ -120,11 +121,13 @@ export default function PublicProfile({ params }) {
                 key={p.id}
                 className="bg-white border rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-lg hover:scale-[1.02] transition transform"
               >
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  className="w-full h-44 object-cover"
-                />
+                      <Image
+            src={p.image}
+            alt={p.title}
+            width={400}          // required
+            height={176}         // required (approx h-44)
+            className="w-full h-44 object-cover"
+          />
                 <div className="p-4 flex flex-col flex-1">
                   <h3 className="font-bold text-lg text-gray-900">
                     {p.title}

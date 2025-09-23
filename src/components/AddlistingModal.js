@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function AddListingModal({ isOpen, onClose, onAdded }) {
   const [name, setName] = useState("");
@@ -128,14 +129,16 @@ export default function AddListingModal({ isOpen, onClose, onAdded }) {
               Upload file
               <input type="file" onChange={handleImageUpload} className="hidden" />
             </label>
-            {image && (
-              <img
-                src={URL.createObjectURL(image)}
-                alt="preview"
-                className="mt-4 w-full h-32 object-cover rounded-md"
-              />
-            )}
-          </div>
+         {image && (
+        <Image
+          src={URL.createObjectURL(image)}
+          alt="preview"
+          width={400}
+          height={200}
+          className="mt-4 w-full h-32 object-cover rounded-md"
+        />
+      )}
+                </div>
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-3 justify-end">

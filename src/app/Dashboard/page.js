@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   FiBell,
   FiShare2,
@@ -308,11 +309,13 @@ export default function Dashboard() {
                       key={idx}
                       className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition"
                     >
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-32 object-cover"
-                      />
+                          <Image
+                src={item.image}
+                alt={item.title}
+                width={400}     // ✅ required
+                height={200}    // ✅ required
+                className="w-full h-32 object-cover"
+              />
                       <div className="p-3">
                         <h3 className="font-semibold text-gray-800 text-sm">
                           {item.title}

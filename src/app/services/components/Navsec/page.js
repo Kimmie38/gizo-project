@@ -246,7 +246,7 @@ export default function Home() {
             </h1>
             <p className='text-lg md:text-xl font-semibold'>
               RENDER A <span className='text-[#28F5BC]'>SERVICE</span> OR SELL{" "}
-              <span className='text-[#28F5BC]'>PRODUCTS</span> WE'VE GOT YOU!!
+              <span className='text-[#28F5BC]'>PRODUCTS</span> We&apos;ve got you!!
             </p>
           </div>
 
