@@ -2,15 +2,10 @@
 const nextConfig = {
   images: {
     domains: [
-      "picsum.photos",       // example: placeholder images
-      "res.cloudinary.com",  // example: Cloudinary
-      "localhost",           // if you ever serve from local
-    ],
-    remotePatterns: [
-      {
-        protocol: "blob", // ✅ allow blob: previews (e.g., from file uploads)
-        hostname: "**",
-      },
+      "picsum.photos",       // example placeholder
+      "res.cloudinary.com",  // Cloudinary
+      "localhost",           // local dev
+      "kasuwa-gizo-backend-1.onrender.com", // your backend
     ],
   },
   async rewrites() {
