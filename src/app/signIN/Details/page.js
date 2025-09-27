@@ -6,8 +6,6 @@ import { AiOutlineCheck } from "react-icons/ai";
 
 export default function BusinessInfo() {
   const router = useRouter();
-
-  // Form state
   const [businessName, setBusinessName] = useState("");
   const [businessEmail, setBusinessEmail] = useState("");
   const [businessPhone, setBusinessPhone] = useState("");
@@ -16,8 +14,6 @@ export default function BusinessInfo() {
   const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
-
-  // Navigate to next screen
   const handleNext = async (e) => {
     e.preventDefault();
 
@@ -32,7 +28,7 @@ export default function BusinessInfo() {
       businessPhone,
       businessCategory: category,
       businessLocation: location,
-      password, // ✅ required by backend
+      password, 
     };
 
     console.log("➡️ Sending business info:", businessData);
