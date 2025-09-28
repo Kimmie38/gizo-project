@@ -74,7 +74,7 @@ function CardSection({ title, items }) {
 
             {/* Button */}
             <Link
-              href={"/services/service"}
+              href={`/services/service/${item.id}`}
               className='mt-3 bg-emerald-100 text-emerald-700 font-medium text-xs py-2 px-3 rounded-lg w-full hover:bg-emerald-200'
             >
               View More →
