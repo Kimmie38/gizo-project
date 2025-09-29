@@ -177,7 +177,20 @@ export default function Signup() {
                   <AiOutlineEye size={20} />
                 )}
               </span>
-            </div>
+            </div>           
+         <div className="flex items-center my-6">
+          <hr className="flex-grow border-gray-300" />
+          <span className="px-2 text-sm text-gray-400">or</span>
+          <hr className="flex-grow border-gray-300" />
+        </div>
+
+        <p className="text-center text-sm text-gray-500">
+          Don&apos;t have an account?{" "}
+          <a href="/signIN/login" className="text-emerald-500 hover:underline">
+            Sign In
+          </a>
+        </p>
+
           </div>
 
           <button
