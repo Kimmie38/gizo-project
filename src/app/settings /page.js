@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Sidebar from "../../../components/sidebar";
+import Sidebar from "@/components/sidebar";
 import { Menu, Bell, Share2 } from "lucide-react";
 
 const ProfilePage = () => {
