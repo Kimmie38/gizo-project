@@ -21,9 +21,9 @@ export default function Login() {
 
     try {
       const res = await fetch(
-        "https://kasuwa-gizo-backend.onrender.com/kasuwa/signin",
+        "https://kasuwa-gizo-backend.onrender.com/kasuwa/auth/signin",
         {
-          method: "POST", // ✅ login is a POST
+          method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         }
@@ -33,7 +33,19 @@ export default function Login() {
 
       if (res.ok && data.success) {
         console.log("✅ Login success");
-        router.push("/Dashboard"); // ✅ go to dashboard
+
+        // 🔹 Save slug if backend provides it
+        if (data.user?.slug) {
+          localStorage.setItem("userSlug", data.user.slug);
+        } else {
+          // 🔹 If backend doesn’t return slug, keep old one
+          const existingSlug = localStorage.getItem("userSlug");
+          if (!existingSlug) {
+            console.warn("⚠️ No slug found in backend or storage.");
+          }
+        }
+
+        router.push("/Dashboard");
       } else {
         setError(data.message || "Login failed");
       }

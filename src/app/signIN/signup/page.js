@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 export default function Signup() {
@@ -17,6 +17,15 @@ export default function Signup() {
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [userSlug, setUserSlug] = useState(null);
+
+  // 🔹 Load slug from localStorage on page load
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedSlug = localStorage.getItem("userSlug");
+      if (savedSlug) setUserSlug(savedSlug);
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,7 +45,7 @@ export default function Signup() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/kasuwa/auth/signup`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -48,11 +57,19 @@ export default function Signup() {
         }
       );
 
-      const data = await res.json();
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error("Server returned an invalid response (not JSON).");
+      }
 
       if (res.ok && data.success) {
-        // ✅ save slug for later use
-        localStorage.setItem("userSlug", data.user.slug);
+        // ✅ Save slug to localStorage
+        if (data.user?.slug) {
+          localStorage.setItem("userSlug", data.user.slug);
+          setUserSlug(data.user.slug); // also update state
+        }
 
         setSuccess("✅ Signup successful!");
         setFormData({ fullName: "", email: "", password: "", confirmPassword: "" });
@@ -60,13 +77,13 @@ export default function Signup() {
         // 👉 Redirect to details page (step 2 of registration)
         setTimeout(() => {
           router.push("/signIN/Details");
-        }, 1000);
+        }, 1500);
       } else {
-        setError(data.message || "Signup failed. Please try again.");
+        setError(data?.message || "Signup failed. Please try again.");
       }
     } catch (err) {
       console.error("🌐 Network error:", err);
-      setError("Network error. Please try again later.");
+      setError(err.message || "Network error. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -86,6 +103,21 @@ export default function Signup() {
         {/* errors */}
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
+
+        {/* ✅ Show user link if available */}
+        {userSlug && (
+          <p className="text-center text-sm mb-4 text-gray-700">
+            Your shop link:{" "}
+            <a
+              href={`https://your-domain.com/${userSlug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-500 underline"
+            >
+              https://your-domain.com/{userSlug}
+            </a>
+          </p>
+        )}
 
         <form className="space-y-5" onSubmit={handleSubmit}>
           {/* Full Name */}
@@ -177,21 +209,21 @@ export default function Signup() {
                   <AiOutlineEye size={20} />
                 )}
               </span>
-            </div>           
-         <div className="flex items-center my-6">
-          <hr className="flex-grow border-gray-300" />
-          <span className="px-2 text-sm text-gray-400">or</span>
-          <hr className="flex-grow border-gray-300" />
-        </div>
-
-        <p className="text-center text-sm text-gray-500">
-          Don&apos;t have an account?{" "}
-          <a href="/signIN/login" className="text-emerald-500 hover:underline">
-            Sign In
-          </a>
-        </p>
-
+            </div>
           </div>
+
+          <div className="flex items-center my-6">
+            <hr className="flex-grow border-gray-300" />
+            <span className="px-2 text-sm text-gray-400">or</span>
+            <hr className="flex-grow border-gray-300" />
+          </div>
+
+          <p className="text-center text-sm text-gray-500">
+            Don&apos;t have an account?{" "}
+            <a href="/signIN/login" className="text-emerald-500 hover:underline">
+              Sign In
+            </a>
+          </p>
 
           <button
             type="submit"

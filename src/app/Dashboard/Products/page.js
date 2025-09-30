@@ -4,6 +4,7 @@ import AddListingModal from "@/components/AddlistingModal";
 import Sidebar from "@/components/sidebar";
 import { Menu, Bell, Share2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link"
 
 const mockProducts = [
   {
@@ -175,9 +176,14 @@ export default function ProductsPage() {
               ₦{p.price.toLocaleString()}
             </p>
             <p className="text-[11px] text-gray-400">{p.category}</p>
-            <button className="mt-3 bg-emerald-600 text-white rounded-md py-2 text-sm hover:bg-emerald-700">
-              View More
-            </button>
+           
+
+              <Link
+                href="/services/viewmore"
+                className="mt-3 bg-emerald-600 text-white rounded-md py-2 text-sm hover:bg-emerald-700 inline-block text-center"
+              >
+                View More
+              </Link>
           </div>
         </div>
       ))}

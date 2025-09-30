@@ -12,7 +12,7 @@ const Navbar = () => {
       <div className="flex items-center gap-2">
         <span className="text-green-500 text-2xl">⌕</span>
         <span className="font-semibold text-lg text-[#282B31]">
-          CompanyName
+          Kasuwan Gizo
         </span>
       </div>
 
