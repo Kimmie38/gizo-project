@@ -7,7 +7,10 @@ export default function ProductSection({ title, products = [] }) {
       {/* Header */}
       <div className='flex justify-between items-center mb-4'>
         <h2 className='text-lg font-bold text-gray-800'>{title}</h2>
-        <Link href='/products' className='text-sm text-green-600 font-medium'>
+        <Link
+          href='/services/products'
+          className='text-sm text-green-600 font-medium'
+        >
           See more
         </Link>
       </div>

@@ -8,12 +8,12 @@ function CardSection({ title, items }) {
       {/* Header */}
       <div className='flex items-center justify-between mb-4'>
         <h2 className='text-lg font-semibold text-gray-900'>{title}</h2>
-        <a
-          href='#'
+        <Link
+          href={`/services/products`}
           className='text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1'
         >
           See more →
-        </a>
+        </Link>
       </div>
 
       {/* Cards Grid */}
