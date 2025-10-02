@@ -147,7 +147,6 @@ const page = () => {
         </Link>
         <h1>Phones & Accessories</h1>
       </section>
-      {/* Location + Search */}
       <div className='flex items-center gap-3 flex-1 max-w-2xl ml-6  p-[16px]'>
         <select className=' rounded-[8px] px-3 py-2 text-sm text-[#000000] focus:outline-none'>
           <option className=' rounded-[8px] bg-red-600 p-[16px] w-[150px]'>
@@ -172,7 +171,6 @@ const page = () => {
           Filters
         </button>
       </div>
-      {/* Grid */}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
         {Array.isArray(products) && products.length > 0 ? (
           products.map((product, index) => (

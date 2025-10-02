@@ -14,9 +14,9 @@ export default function Subscription() {
 
   const handlePaystack = (amount) => {
     const handler = window.PaystackPop.setup({
-      key: process.env.NEXT_PUBLIC_PAYSTACK_KEY, // your public key
-      email: "kimrwang9@gmail.com", // replace with user email
-      amount: amount * 100, // in kobo
+      key: process.env.NEXT_PUBLIC_PAYSTACK_KEY, 
+      email: "kimrwang9@gmail.com", 
+      amount: amount * 100, 
       currency: "NGN",
       callback: function (response) {
         alert("✅ Payment complete! Reference: " + response.reference);

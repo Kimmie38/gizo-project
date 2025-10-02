@@ -6,14 +6,12 @@ const Hero = () => {
         <section
       className="relative flex flex-col-reverse md:flex-row items-center justify-between px-6 sm:px-10 lg:px-16 py-12 sm:py-20"
       style={{
-        backgroundImage: "url('/images/bg-image.jpg')", // <-- your bg image
+        backgroundImage: "url('/images/bg-image.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      {/* Dark Overlay for readability */}
       <div className="absolute inset-0 bg-black/40 z-0"></div>
-      {/* Content (left aligned) */}
       <div className="relative z-10 max-w-xl text-white">
         <h1 className="text-3xl sm:text-5xl font-bold leading-snug">
           Give Your Business the{" "}
@@ -23,8 +21,6 @@ const Hero = () => {
           Connect with customers, showcase your products and services, and grow
           your MSME with our easy-to-use platform.
         </p>
-
-        {/* Buttons */}
         <div className="mt-6 flex gap-4">
 
             <Link href="/services">
@@ -32,9 +28,11 @@ const Hero = () => {
             Market place
           </button>
           </Link>
+          <Link href="/signIN/signup">
           <button className="px-6 py-3 bg-teal-500 text-white rounded-lg shadow hover:bg-teal-600">
             Sign Up
           </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -3,7 +3,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
-// import Emage from "../../../../public/images/first.png";
 import ReviewCard from "../components/ReviewCard/page";
 import ProductSection from "../components/ProductSection/page";
 import Link from "next/link";
@@ -15,8 +14,7 @@ const Page = () => {
   const reviews = [
     {
       name: "Daniel Ademola",
-      image: "/images/apple.png", // place images inside /public/avatars/
-      rating: 4,
+      image: "/images/apple.png",
       review: "This is an amazing product. I would love to patronize once more",
     },
     {
@@ -100,7 +98,7 @@ const Page = () => {
       setVisibleProducts(shuffled.slice(0, 4));
     };
 
-    shuffleAndPick(); // initial load
+    shuffleAndPick(); 
 
     const interval = setInterval(shuffleAndPick, 3000);
     return () => clearInterval(interval);
@@ -231,7 +229,6 @@ const Page = () => {
         </section>
       </section>
       <section className=' '>
-        {/* <h1 className=' text-[28px] font-normal '>Similar Products</h1> */}
         <div className=' my-[32px] '>
           <ProductSection title='Similar Products' products={visibleProducts} />{" "}
         </div>

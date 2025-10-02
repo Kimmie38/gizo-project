@@ -30,13 +30,11 @@ export default function PublicProfile() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      {/* User Info */}
       <div className="max-w-3xl mx-auto mb-8 text-center">
         <h1 className="text-2xl font-bold">{user.fullName}</h1>
         <p className="text-gray-600">{user.email}</p>
       </div>
 
-      {/* Listings */}
       <div className="max-w-5xl mx-auto">
         {listings.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

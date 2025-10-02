@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import Navbar from "./components/Nav/page";
 import Hero from "./components/Hero/page";
 import WhyChooseUs from "./components/WhyChooseUs/page";

@@ -24,7 +24,6 @@ import AddListingModal from "@/components/AddlistingModal";
 import Sidebar from "@/components/sidebar";
 import ProductGrid from "@/components/ProductGrid";
 
-// Overview cards
 const cards = [
   {
     title: "Products and Services",
@@ -46,7 +45,6 @@ const cards = [
   },
 ];
 
-// Chart data
 const chartData = [
   { day: "Mon", views: 1200 },
   { day: "Tue", views: 1800 },
@@ -66,7 +64,6 @@ export default function Dashboard() {
   const [origin, setOrigin] = useState("");
   const router = useRouter();
 
-  // Load slug + window origin on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedSlug = localStorage.getItem("userSlug");
@@ -76,13 +73,10 @@ export default function Dashboard() {
   }, []);
 
   const shareableLink = userSlug ? `${origin}/u/${userSlug}` : "";
-
-  // ✅ Smart share handler
   const handleShare = async () => {
     if (!shareableLink) return;
 
     if (navigator.share) {
-      // Mobile native share
       try {
         await navigator.share({
           title: "My Business Profile",
@@ -93,7 +87,6 @@ export default function Dashboard() {
         console.error("❌ Share cancelled or failed:", err);
       }
     } else {
-      // Desktop fallback: copy to clipboard
       try {
         await navigator.clipboard.writeText(shareableLink);
         setCopied(true);
@@ -106,15 +99,10 @@ export default function Dashboard() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} />
-
-      {/* Main */}
       <div className="flex-1 flex flex-col md:ml-64">
-        {/* Topbar */}
         <header className="px-4 pt-4 md:px-6 md:pt-6">
           <div className="bg-white shadow-sm rounded-xl px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 flex justify-between items-center">
-            {/* Left: Menu + Search */}
             <div className="flex items-center gap-2 sm:gap-3 flex-1 max-w-md">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -128,12 +116,8 @@ export default function Dashboard() {
                 className="flex-1 px-3 py-2 rounded-full border text-sm focus:ring-2 focus:ring-emerald-500"
               />
             </div>
-
-            {/* Right */}
             <div className="flex items-center space-x-3 sm:space-x-4 ml-3 sm:ml-4">
               <FiBell className="w-5 h-5 text-gray-600 cursor-pointer" />
-
-              {/* Share icon in topbar */}
               <div
                 onClick={handleShare}
                 className="cursor-pointer flex items-center"
@@ -146,7 +130,6 @@ export default function Dashboard() {
                 )}
               </div>
 
-              {/* Profile */}
               <div className="hidden sm:flex items-center space-x-2">
                 <div className="w-8 h-8 rounded-full bg-emerald-700 shrink-0"></div>
                 <div className="hidden md:block">
@@ -161,11 +144,9 @@ export default function Dashboard() {
             </div>
           </div>
         </header>
-
-        {/* Content */}
         <main className="flex-1 px-3 sm:px-4 md:px-6 mt-4 md:mt-6">
           <div className="max-w-[950px] mx-auto">
-            {/* Business Overview */}
+
             <section>
               <h2 className="text-lg md:text-xl font-bold mb-1">
                 Business Overview
@@ -242,14 +223,11 @@ export default function Dashboard() {
                 </ResponsiveContainer>
               </div>
             </section>
-
-            {/* Quick Actions */}
             <section className="mt-6 md:mt-8 bg-white rounded-xl shadow-sm p-4 md:p-6 mb-12">
               <h2 className="text-base md:text-lg font-bold mb-3 md:mb-4">
                 Quick Actions
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                {/* Add Product */}
                 <button
                   onClick={() => setShowAddListing(true)}
                   className="bg-emerald-600 text-white rounded-xl p-4 md:p-6 text-left hover:shadow-md"
@@ -262,8 +240,6 @@ export default function Dashboard() {
                   </div>
                   <p className="text-sm opacity-90">List a new offer</p>
                 </button>
-
-                {/* Share Business Link */}
                 <button
                   onClick={handleShare}
                   className="bg-white border rounded-xl p-4 md:p-6 text-left hover:shadow-md"
@@ -283,8 +259,6 @@ export default function Dashboard() {
                     </p>
                   )}
                 </button>
-
-                {/* Subscription */}
                 <button className="bg-white border rounded-xl p-4 md:p-6 text-left hover:shadow-md">
                   <div className="flex items-center mb-2">
                     <FiFileText className="w-5 h-5 text-emerald-600 mr-3" />
@@ -296,8 +270,6 @@ export default function Dashboard() {
                 </button>
               </div>
             </section>
-
-            {/* Listings Grid */}
             {listings.length > 0 && (
               <section className="mb-12">
                 <h2 className="text-base md:text-lg font-bold mb-3 md:mb-4">
@@ -312,8 +284,8 @@ export default function Dashboard() {
                           <Image
                 src={item.image}
                 alt={item.title}
-                width={400}     // ✅ required
-                height={200}    // ✅ required
+                width={400}     
+                height={200}    
                 className="w-full h-32 object-cover"
               />
                       <div className="p-3">
@@ -333,8 +305,6 @@ export default function Dashboard() {
           </div>
         </main>
       </div>
-
-      {/* Modal */}
       <AddListingModal
         isOpen={showAddListing}
         onClose={() => setShowAddListing(false)}

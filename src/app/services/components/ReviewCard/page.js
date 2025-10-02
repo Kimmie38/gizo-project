@@ -16,7 +16,6 @@ export default function ReviewCard({ name, image, rating, review }) {
         />
         <span className='font-medium'>{name}</span>
 
-        {/* Stars */}
         <div className='flex ml-2'>
           {Array.from({ length: 5 }).map((_, index) => (
             <Icon

@@ -36,7 +36,6 @@ export default function PublicProfile({ params }) {
   const [category, setCategory] = useState("All");
   const [priceRange, setPriceRange] = useState("All");
 
-  // Filtering logic
   const filtered = products.filter((p) => {
     const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase());
     const matchesCategory =
@@ -56,7 +55,6 @@ export default function PublicProfile({ params }) {
   return (
     <div className="bg-gray-50 min-h-screen py-8 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <header className="px-4 pt-4 mb-6">
           <div className="bg-white shadow-sm rounded-xl px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -71,14 +69,11 @@ export default function PublicProfile({ params }) {
           </div>
         </header>
 
-        {/* Section Heading */}
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           🛍️ Available Products
         </h2>
 
-        {/* Filters */}
         <div className="flex flex-col md:flex-row gap-4 mb-8 justify-center">
-          {/* Search */}
           <input
             type="text"
             placeholder="Search Product"
@@ -87,7 +82,6 @@ export default function PublicProfile({ params }) {
             className="w-full md:w-1/3 pl-4 pr-4 py-2 rounded-full border border-gray-200 text-sm focus:ring-2 focus:ring-emerald-500"
           />
 
-          {/* Category Filter */}
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -98,7 +92,6 @@ export default function PublicProfile({ params }) {
             <option value="Services">Services</option>
           </select>
 
-          {/* Price Filter */}
           <select
             value={priceRange}
             onChange={(e) => setPriceRange(e.target.value)}
@@ -111,7 +104,6 @@ export default function PublicProfile({ params }) {
           </select>
         </div>
 
-        {/* Products */}
         {filtered.length === 0 ? (
           <p className="text-gray-500 text-center">No items found</p>
         ) : (
@@ -124,8 +116,8 @@ export default function PublicProfile({ params }) {
                       <Image
             src={p.image}
             alt={p.title}
-            width={400}          // required
-            height={176}         // required (approx h-44)
+            width={400}          
+            height={176}         
             className="w-full h-44 object-cover"
           />
                 <div className="p-4 flex flex-col flex-1">

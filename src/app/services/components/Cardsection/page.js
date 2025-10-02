@@ -1,10 +1,8 @@
 import Image from "next/image";
 
-// Reusable Section Component
 function CardSection({ title, items }) {
   return (
     <section className="w-full bg-[#FFF] p-4 md:p-6 rounded-[8px] mb-8 shadow-[0_4px_11px_0_rgba(2,143,122,0.04)">
-      {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
         <a
@@ -15,14 +13,12 @@ function CardSection({ title, items }) {
         </a>
       </div>
 
-      {/* Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {items.map((item, index) => (
           <div
             key={index}
             className="bg-white rounded-2xl shadow-sm p-4 flex flex-col justify-between hover:shadow-md transition-all duration-300"
           >
-            {/* Image */}
             {item.image ? (
               <div className="w-full h-40 rounded-xl overflow-hidden relative">
                 <Image
@@ -42,7 +38,6 @@ function CardSection({ title, items }) {
               </div>
             )}
 
-            {/* Content */}
             <div className="mt-4 flex flex-col flex-grow">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-semibold text-gray-900">
@@ -56,20 +51,14 @@ function CardSection({ title, items }) {
                 {item.description}
               </p>
             </div>
-
-            {/* Location */}
             {item.location && (
               <p className="text-xs text-gray-400 mt-2">{item.location}</p>
             )}
-
-            {/* Price */}
             {item.price && (
               <p className="text-sm font-semibold text-gray-900 mt-2">
                 {item.price}
               </p>
             )}
-
-            {/* Button */}
             <button className="mt-3 bg-emerald-100 text-emerald-700 font-medium text-xs py-2 px-3 rounded-lg w-full hover:bg-emerald-200">
               View More →
             </button>
@@ -80,11 +69,10 @@ function CardSection({ title, items }) {
   );
 }
 
-// Main Page
 export default function Page() {
   const automobiles = [
     {
-      image: "/images/cars.png", // ✅ fixed path (inside /public/images)
+      image: "/images/cars.png",
       name: "Toyota Camry 6",
       rating: 4.7,
       description:
@@ -93,7 +81,7 @@ export default function Page() {
       price: "₦20,000.00",
     },
     {
-      image: "/images/highlander.png", // ✅ should be inside /public/cars/
+      image: "/images/highlander.png", 
       name: "Toyota Truck",
       rating: 4.7,
       description:
@@ -103,7 +91,7 @@ export default function Page() {
     },
 
     {
-      image: "/images/garage.png", // ✅ should be inside /public/cars/
+      image: "/images/garage.png", 
       name: "Toyota Truck",
       rating: 4.7,
       description:
@@ -112,7 +100,7 @@ export default function Page() {
       price: "₦20,000.00",
     },
     {
-      image: "/images/trailer.png", // ✅ should be inside /public/cars/
+      image: "/images/trailer.png", 
       name: "Toyota Truck",
       rating: 4.7,
       description:
@@ -124,7 +112,7 @@ export default function Page() {
 
   const businesses = [
     {
-      image: "/images/tailor.png", // ✅ should be inside /public/logos/
+      image: "/images/tailor.png", 
       name: "Tobbikare PLC",
       description:
         "An agro-processing and distribution company committed to bringing fresh vegetables and farm produce from local farmers to households.",
@@ -145,7 +133,7 @@ export default function Page() {
       location: "📍 Abuja, Owerrinta street",
     },
       {
-      image: "/images/plumber.png", // ✅ should be inside /public/logos/
+      image: "/images/plumber.png", 
       name: "Tobbikare PLC",
       description:
         "An agro-processing and distribution company committed to bringing fresh vegetables and farm produce from local farmers to households.",
@@ -156,10 +144,7 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-white flex justify-center p-6">
       <div className="w-full max-w-7xl">
-        {/* Render Automobiles */}
         <CardSection title="Automobile" items={automobiles} />
-
-        {/* Render Businesses */}
         <CardSection title="Top Businesses" items={businesses} />
       </div>
     </main>

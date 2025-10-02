@@ -26,14 +26,9 @@ const ProfilePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-      {/* Main content */}
       <div className="flex-1 pl-64 p-6 space-y-8">
-        {/* Header */}
         <header className="bg-white shadow-sm rounded-xl px-4 py-3 flex items-center justify-between">
-          {/* Search */}
           <div className="flex-1 max-w-md">
             <div className="relative">
               <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
@@ -48,8 +43,6 @@ const ProfilePage = () => {
               />
             </div>
           </div>
-
-          {/* Icons + Profile */}
           <div className="flex items-center gap-3">
             <button className="p-2 rounded-full hover:bg-gray-100">
               <Bell className="w-5 h-5 text-gray-600" />
@@ -70,8 +63,6 @@ const ProfilePage = () => {
             </div>
           </div>
         </header>
-
-        {/* Profile Section */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold mb-4">Profile</h2>
           <div className="flex items-center mb-6">
@@ -124,8 +115,6 @@ const ProfilePage = () => {
             </button>
           </div>
         </div>
-
-        {/* Subscription Section */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold mb-4">Subscription</h2>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between">
@@ -146,8 +135,6 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-
-        {/* Security Section */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold mb-4">Security</h2>
           <button

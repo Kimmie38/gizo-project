@@ -37,14 +37,11 @@ const ProfilePage = () => {
 
   return (
     <div className='min-h-screen bg-gray-50 p-6 flex'>
-      {/* Sidebar */}
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+x      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-      {/* Main content */}
       <div className='flex-1 max-w-5xl mx-auto space-y-8'>
         <header className='px-3 pt-4 sm:px-4 md:px-6 md:pt-6'>
           <div className='bg-white shadow-sm rounded-xl px-3 py-3 sm:px-4 flex items-center justify-between gap-4'>
-            {/* Left: Search */}
             <div className='flex-1 max-w-md'>
               <div className='relative'>
                 <span className='absolute inset-y-0 left-3 flex items-center text-gray-400'>
@@ -60,7 +57,6 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            {/* Right: Icons + Profile */}
             <div className='flex items-center gap-3'>
               <button className='p-2 rounded-full hover:bg-gray-100'>
                 <Bell className='w-5 h-5 text-gray-600' />
@@ -69,7 +65,6 @@ const ProfilePage = () => {
                 <Share2 className='w-5 h-5 text-gray-600' />
               </button>
 
-              {/* Profile */}
               <div className='flex items-center gap-2 bg-white shadow px-3 py-2 rounded-xl'>
                 <div className='w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white font-medium'>
                   A
@@ -84,12 +79,11 @@ const ProfilePage = () => {
             </div>
           </div>
         </header>
-        {/* Profile Section */}
         <div className='bg-white p-6 rounded-lg shadow-md'>
           <h2 className='text-lg font-semibold mb-4'>Profile</h2>
           <div className='flex items-center mb-6'>
             <Image
-              src='/images/barber.png' // replace with actual image or firebase storage url
+              src='/images/barber.png' 
               alt='Profile'
               width={100}
               height={100}
@@ -165,7 +159,6 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Subscription Section */}
         <div className='bg-white p-6 rounded-lg shadow-md'>
           <h2 className='text-lg font-semibold mb-4'>Subscription</h2>
           <div className='flex flex-col sm:flex-row sm:items-center justify-between'>
@@ -187,7 +180,6 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Change Password Section */}
         <div className='bg-white p-6 rounded-lg shadow-md'>
           <h2 className='text-lg font-semibold mb-4'>Security</h2>
           <button

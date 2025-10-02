@@ -14,7 +14,7 @@ export default function ProductCard({ product }) {
 
   return (
     <div className="bg-white rounded-xl shadow-sm overflow-hidden flex flex-col w-full">
-      {/* Product Image */}
+
       <div className="relative w-full h-40">
         {product.image ? (
           <Image
@@ -30,8 +30,6 @@ export default function ProductCard({ product }) {
           </div>
         )}
       </div>
-
-      {/* Product Details */}
       <div className="p-3 flex flex-col flex-1">
         <h3 className="text-sm font-semibold text-gray-800 truncate">
           {product.name}

@@ -36,7 +36,7 @@ const mockProducts = [
   {
     id: 4,
     name: "Apples",
-    image: "/images/app.png",
+    image: "/images/apple.png",
     rating: 4.7,
     reviews: 200,
     description: "Freshly harvested apples from the farm in the last one week",
@@ -46,7 +46,7 @@ const mockProducts = [
   {
     id: 4,
     name: "Apples",
-    image: "/images/app.png",
+    image: "/images/apple.png",
     rating: 4.7,
     reviews: 200,
     description: "Freshly harvested apples from the farm in the last one week",
@@ -56,7 +56,7 @@ const mockProducts = [
   {
     id: 4,
     name: "Apples",
-    image: "/images/app.png",
+    image: "/images/apple.png",
     rating: 4.7,
     reviews: 200,
     description: "Freshly harvested apples from the farm in the last one week",

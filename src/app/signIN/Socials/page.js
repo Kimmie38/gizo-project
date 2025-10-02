@@ -40,7 +40,7 @@ export default function BusinessSocials() {
 
       if (res.ok && data.success) {
         console.log("✅ Saved:", data);
-        router.push("/Dashboard"); // move to Dashboard
+        router.push("/Dashboard"); 
       } else {
         setError(data.message || "Failed to save socials");
       }
@@ -53,7 +53,7 @@ export default function BusinessSocials() {
   };
 
   const handlePrevious = () => {
-    router.back(); // ✅ go back one step
+    router.back(); 
   };
 
   return (
@@ -61,7 +61,6 @@ export default function BusinessSocials() {
       className="relative min-h-screen flex items-center justify-center 
       bg-gradient-to-r from-[#0f172a] via-[#1e3a8a] to-[#4c1d95] animate-gradient px-4"
     >
-      {/* Background wall image */}
       <Image
         src={wall}
         alt="Background Wall"
@@ -70,7 +69,6 @@ export default function BusinessSocials() {
         priority
       />
 
-      {/* Foreground Card */}
       <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 md:p-10">
         <h1 className="text-3xl font-bold text-center mb-2 text-black">
           Create Account
@@ -79,7 +77,6 @@ export default function BusinessSocials() {
           Link your socials to connect with customers.
         </p>
 
-        {/* Stepper */}
         <div className="flex justify-center items-center space-x-6 mb-8">
           <div className="flex flex-col items-center">
             <div className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-500 text-white font-bold">
@@ -107,12 +104,10 @@ export default function BusinessSocials() {
           Business Socials
         </h2>
 
-        {/* Error Message */}
         {error && (
           <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
         )}
 
-        {/* Form */}
         <form className="space-y-5" onSubmit={handleNext}>
           <div>
             <label className="block text-sm font-medium text-black mb-1">
@@ -170,7 +165,6 @@ export default function BusinessSocials() {
             />
           </div>
 
-          {/* Buttons */}
           <div className="flex justify-between mt-6">
             <button
               type="button"

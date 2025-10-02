@@ -18,9 +18,7 @@ export default function Sidebar({ sidebarOpen }) {
   const pathname = usePathname();
 
   const handleLogout = () => {
-    // 🔑 Clear stored session/token if you save any
     localStorage.clear();
-    // ✅ Redirect to login page
     router.push("/signIN/login");
   };
 
@@ -29,7 +27,6 @@ export default function Sidebar({ sidebarOpen }) {
       className={`fixed top-0 left-0 h-full bg-white border-r w-64 transform transition-transform 
       ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 z-40 flex flex-col`}
     >
-      {/* Logo */}
       <div className="px-6 py-10 flex items-center space-x-4">
         <div className="w-7 h-7 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold">
           Q
@@ -37,7 +34,6 @@ export default function Sidebar({ sidebarOpen }) {
         <span className="font-semibold text-gray-800">Kasuwan Gizo</span>
       </div>
 
-      {/* Nav */}
       <nav className="px-4 space-y-4 flex-1">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -63,7 +59,6 @@ export default function Sidebar({ sidebarOpen }) {
         })}
       </nav>
 
-      {/* Logout button */}
       <div className="px-4 py-6 border-t">
         <button
           onClick={handleLogout}

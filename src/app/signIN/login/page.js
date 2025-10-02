@@ -34,11 +34,9 @@ export default function Login() {
       if (res.ok && data.success) {
         console.log("✅ Login success");
 
-        // 🔹 Save slug if backend provides it
         if (data.user?.slug) {
           localStorage.setItem("userSlug", data.user.slug);
         } else {
-          // 🔹 If backend doesn’t return slug, keep old one
           const existingSlug = localStorage.getItem("userSlug");
           if (!existingSlug) {
             console.warn("⚠️ No slug found in backend or storage.");
@@ -69,10 +67,8 @@ export default function Login() {
           Welcome back, sign into your account
         </p>
 
-        {/* Error */}
         {error && <p className="text-red-500 text-center text-sm mb-4">{error}</p>}
 
-        {/* Form */}
         <form className="space-y-5" onSubmit={handleNext}>
           <input
             type="email"
@@ -102,14 +98,12 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Divider */}
         <div className="flex items-center my-6">
           <hr className="flex-grow border-gray-300" />
           <span className="px-2 text-sm text-gray-400">or</span>
           <hr className="flex-grow border-gray-300" />
         </div>
 
-        {/* Sign up link */}
         <p className="text-center text-sm text-gray-500">
           Don&apos;t have an account?{" "}
           <a href="/signIN/signup" className="text-emerald-500 hover:underline">
@@ -117,7 +111,6 @@ export default function Login() {
           </a>
         </p>
 
-        {/* Google Signup */}
         <button className="w-full mt-4 flex items-center justify-center border border-gray-300 py-3 rounded-md hover:bg-gray-50 transition text-sm md:text-base text-black">
           <Image
             src="/icons/google.png"

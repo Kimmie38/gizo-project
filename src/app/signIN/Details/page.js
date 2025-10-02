@@ -62,10 +62,8 @@ export default function BusinessInfo() {
     }
   };
 
-  // Go back to previous screen
   const handlePrevious = () => router.back();
 
-  // Get user location
   const handleGetLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -90,7 +88,6 @@ export default function BusinessInfo() {
           Get started by setting up your business info.
         </p>
 
-        {/* Stepper */}
         <div className="flex justify-center items-center space-x-6 mb-8">
           <div className="flex flex-col items-center">
             <div className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-500 text-white font-bold">
@@ -116,7 +113,6 @@ export default function BusinessInfo() {
           </div>
         </div>
 
-        {/* Form */}
         <form className="space-y-5" onSubmit={handleNext}>
           <div>
             <label className="block text-sm font-medium text-black mb-1">
@@ -159,7 +155,6 @@ export default function BusinessInfo() {
             />
           </div>
 
-          {/* Business Category */}
           <div>
             <label className="block text-sm font-medium text-black mb-1">
               Business Category
@@ -192,7 +187,6 @@ export default function BusinessInfo() {
             </select>
           </div>
 
-          {/* Business Location */}
           <div>
             <label className="block text-sm font-medium text-black mb-1">
               Business Location
@@ -214,7 +208,6 @@ export default function BusinessInfo() {
             </button>
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-sm font-medium text-black mb-1">
               Password
@@ -229,7 +222,6 @@ export default function BusinessInfo() {
             />
           </div>
 
-          {/* Buttons */}
           <div className="flex justify-between mt-6">
             <button
               type="button"

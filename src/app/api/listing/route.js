@@ -26,7 +26,7 @@ export async function GET() {
 export async function POST(req) {
   try {
     const newListing = await req.json();
-    newListing.id = Date.now(); // simple unique ID
+    newListing.id = Date.now(); 
     listings.push(newListing);
     return Response.json(newListing, { status: 201 });
   } catch (error) {

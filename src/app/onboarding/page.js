@@ -9,7 +9,6 @@ export default function Onboarding() {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
-      {/* Left Section */}
       <div className="relative w-full md:w-1/2 flex flex-col justify-end items-center text-white p-6 md:p-8">
         <Image
           src={wall}
@@ -18,8 +17,6 @@ export default function Onboarding() {
           className="object-cover"
           priority
         />
-
-        {/* Overlay content */}
         <div className="relative z-10 text-center mt-40 md:mt-0 mb-8 md:mb-12 max-w-md px-4">
           <h2 className="text-lg md:text-xl font-semibold mb-2">How it works</h2>
           <p className="text-xs md:text-sm leading-relaxed text-gray-200">
@@ -28,8 +25,6 @@ export default function Onboarding() {
             our trusted payment system, track your orders in real time, and
             share reviews to help others.
           </p>
-
-          {/* Small progress dots */}
           <div className="flex justify-center mt-6 space-x-2">
             <span className="w-2 h-2 bg-white rounded-full"></span>
             <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
@@ -37,8 +32,6 @@ export default function Onboarding() {
           </div>
         </div>
       </div>
-
-      {/* Right Section */}
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white">
         <div className="max-w-md w-full px-4 sm:px-6 md:px-8 py-12 md:py-0">
           <h1 className="text-2xl font-bold text-center mb-2 text-black">
@@ -51,8 +44,6 @@ export default function Onboarding() {
           <p className="text-center text-gray-500 mb-4 text-sm md:text-base">
             Select an option which best describes you
           </p>
-
-          {/* Options */}
           <div className="space-y-4">
             <button
               onClick={() => setRole("user")}
@@ -78,8 +69,6 @@ export default function Onboarding() {
               <Image src="/icons/user.svg" alt="Vendor" width={20} height={20} />
             </button>
           </div>
-
-          {/* Next Button */}
           <button
             disabled={!role}
             className={`w-full mt-6 md:mt-8 py-3 rounded-xl font-medium text-sm md:text-base ${

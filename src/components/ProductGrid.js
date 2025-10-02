@@ -17,8 +17,8 @@ export default function ProductGrid({ products }) {
           <Image
             src={p.image}
             alt={p.title}
-            width={400}       // ✅ required
-            height={112}      // ~h-28 (112px)
+            width={400}       
+            height={112}      
             className="w-full h-28 object-cover"
           />
           <div className="p-3 flex flex-col flex-1">

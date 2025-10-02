@@ -9,26 +9,26 @@ import Link from "next/link"
 const mockProducts = [
   {
     id: 1,
-    title: "10 Basket of Tomatoes",
+    title: "10 Basket of Strawberries",
     price: 20000,
-    desc: "Freshly harvested tomatoes",
+    desc: "Freshly harvested strawberries",
     image: "https://picsum.photos/id/1080/400/300",
     category: "Products",
   },
   {
     id: 2,
-    title: "Spinach",
+    title: "20 Bags of Onions",
     price: 20000,
-    desc: "Fresh spinach",
+    desc: "Fresh harvested Onions",
     image: "https://picsum.photos/id/292/400/300",
     category: "Products",
   },
   {
     id: 3,
-    title: "Delivery Service",
+    title: "10 Baskets of tomatoes",
     price: 5000,
-    desc: "Fast same-day delivery",
-    image: "https://picsum.photos/id/292/400/300",
+    desc: "Freshly harvested tomatoes",
+    image: "/images/tomatoes.png",
     category: "Services",
   },
 ];
@@ -40,14 +40,12 @@ export default function ProductsPage() {
   const [search, setSearch] = useState("");
   const [copied, setCopied] = useState(false);
 
-  // ✅ Assume slug is stored for logged-in user (hardcoded for demo)
+
   const slug = "techbiz-solutions"; // replace with actual user.slug from backend
   const profileUrl =
     typeof window !== "undefined"
       ? `${window.location.origin}/${slug}`
       : "";
-
-  // ✅ Clipboard function
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(profileUrl);
@@ -58,22 +56,16 @@ export default function ProductsPage() {
     }
   };
 
-  // ✅ Search filter only
   const filtered = products.filter((p) =>
     p.title.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="flex min-h-screen bg-gray-50 overflow-hidden">
-      {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-      {/* Main Section */}
       <div className="flex-1 flex flex-col md:ml-64">
-        {/* Topbar */}
         <header className="px-3 pt-4 sm:px-4 md:px-6 md:pt-6">
           <div className="bg-white shadow-sm rounded-xl px-3 py-3 sm:px-4 flex items-center justify-between gap-4">
-            {/* Left: Search */}
             <div className="flex-1 max-w-md">
               <div className="relative">
                 <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
@@ -88,14 +80,10 @@ export default function ProductsPage() {
                 />
               </div>
             </div>
-
-            {/* Right: Icons + Profile */}
             <div className="flex items-center gap-3">
               <button className="p-2 rounded-full hover:bg-gray-100">
                 <Bell className="w-5 h-5 text-gray-600" />
               </button>
-
-              {/* ✅ Share Business Link button */}
               <button
                 onClick={handleCopy}
                 className="p-2 rounded-full hover:bg-gray-100 relative"
@@ -107,8 +95,6 @@ export default function ProductsPage() {
                   </span>
                 )}
               </button>
-
-              {/* Profile */}
               <div className="flex items-center gap-2 bg-white shadow px-3 py-2 rounded-xl">
                 <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white font-medium">
                   A
@@ -123,10 +109,7 @@ export default function ProductsPage() {
             </div>
           </div>
         </header>
-
-        {/* Body Content */}
         <main className="flex-1 px-4 mt-6 md:px-6 space-y-6">
-          {/* Overview + Add button */}
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-lg font-semibold">
@@ -143,13 +126,9 @@ export default function ProductsPage() {
               + Add New Listing
             </button>
           </div>
-
-          {/* Section Heading */}
           <h3 className="text-md font-semibold text-gray-800">
             Products & Services
           </h3>
-
-          {/* Products Grid inside container */}
 <div className="bg-white rounded-xl shadow-sm p-4">
   {filtered.length === 0 ? (
     <p className="text-gray-500 text-center">No items found</p>
@@ -163,8 +142,8 @@ export default function ProductsPage() {
                 <Image
           src={p.image}
           alt={p.title}
-          width={400}     // required
-          height={300}    // required
+          width={400}     
+          height={300}    
           className="w-full h-40 object-cover"
         />
           <div className="p-4 flex flex-col flex-1">
@@ -195,7 +174,6 @@ export default function ProductsPage() {
         </main>
       </div>
 
-      {/* Modal */}
       <AddListingModal
         isOpen={showAddListing}
         onClose={() => setShowAddListing(false)}

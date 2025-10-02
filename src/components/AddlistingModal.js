@@ -15,7 +15,7 @@ export default function AddListingModal({ isOpen, onClose, onAdded }) {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(file); // store file itself
+      setImage(file); 
     }
   };
 
